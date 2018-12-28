@@ -4,6 +4,16 @@
   margin: 0 auto;
 }
 
+/* App.js */
+.small-container{
+  width: 90%;
+  margin: 0 auto;
+}
+.keep-as-row {
+  display: flex;
+  justify-content: space-between;
+}
+
 /* AppTitle.js */
 .title {
   text-align: center; 
