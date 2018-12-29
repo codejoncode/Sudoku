@@ -3,6 +3,7 @@ import React, { Component } from "react";
 import "./App.css";
 import Home from "./Components/Home";
 import AppTitle from "./Components/AppTitle";
+import Numbers from "./Components/Numbers";
 
 class App extends Component {
   state = {
@@ -76,8 +77,9 @@ class App extends Component {
           </div>
         </div>
         <div className="small-container">
-          <Home grid = {this.state.grid}/>
+          <Home grid = {this.state.grid} color = {this.state.colors[this.state.colorsIndex]}/>
         </div>
+        <Numbers />
       </div>
     );
   }

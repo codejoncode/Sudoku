@@ -9,7 +9,7 @@ class Home extends Component {
       <Grid>
         <Row className="show-grid">
           {grid.map((col, id) => (
-            <Col className="column" key = {id}>{col}</Col>
+            <Col style = {{color: this.props.color}} className="column" key = {id}>{col}</Col>
           ))}
         </Row>
       </Grid>
