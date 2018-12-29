@@ -50,8 +50,6 @@
   height: 10vh;
   width: 4.5vw;
   text-align: center; 
-  margin-left: auto;
-  margin-right: auto;
 }
 .number:hover {
   cursor: pointer;
