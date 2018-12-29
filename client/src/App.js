@@ -11,7 +11,31 @@ class App extends Component {
     difficultyIndex : 0,
     colors : ["black","red", "blue", "purple", "pink", "green", "orange", "yellow"],
     colorsIndex: 0, 
+    grid : [
+      [0,0,0,0,0,0,0,0,0],
+      [0,0,0,0,0,0,0,0,0],
+      [0,0,0,0,0,0,0,0,0],
+      [0,0,0,0,0,0,0,0,0],
+      [0,0,0,0,0,0,0,0,0],
+      [0,0,0,0,0,0,0,0,0],
+      [0,0,0,0,0,0,0,0,0],
+      [0,0,0,0,0,0,0,0,0],
+      [0,0,0,0,0,0,0,0,0],
+    ]
   };
+
+  boardSetUp = () => {
+    const numbers = [1,2,3,4,5,6,7,8,9]
+
+    for (let i = numbers.length - 1; i > 0; i--) {
+      const j = Math.floor(Math.random() * (i + 1));
+      const temp = numbers[i];
+      numbers[i] = numbers[j];
+      numbers[j] = temp;
+    }
+
+    //The first part above shuffles the nummbers array. 
+  }
 
   handleChange = (event) => {
     this.setState({ [event.target.name]: event.target.value });
@@ -53,7 +77,7 @@ class App extends Component {
           </div>
         </div>
         <div className="small-container">
-          <Home />
+          <Home grid = {this.state.grid}/>
         </div>
       </div>
     );

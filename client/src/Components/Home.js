@@ -1,19 +1,20 @@
-import React, {Component} from 'react';
-import {Grid, Row, Col} from 'react-bootstrap'; 
+import React, { Component } from "react";
+import { Grid, Row, Col } from "react-bootstrap";
 class Home extends Component {
-    state = {
+  state = {};
 
-    }
-
-    render () {
-        return (
-            <Grid>
-                <Row className="show-grid">
-                    <Col className = "column">0</Col>
-                </Row>
-            </Grid>
-        )
-    }
+  render() {
+    const grid = this.props.grid.flat()
+    return (
+      <Grid>
+        <Row className="show-grid">
+          {grid.map((col, id) => (
+            <Col className="column" key = {id}>{col}</Col>
+          ))}
+        </Row>
+      </Grid>
+    );
+  }
 }
 
-export default Home; 
+export default Home;

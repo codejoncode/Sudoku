@@ -18,13 +18,24 @@
 .title {
   text-align: center; 
   font-size: 14vh; 
+  color: #001A9E;
+  background: black;
+  box-shadow: 2px 3px;
 }
 
 /* Home.js */
 .column {
   border: 1px solid black;
-  height: 2vh;
-  width: 2vw;
+  height: 4vh;
+  width: 4vw;
   text-align: center; 
+}
+.show-grid {
+  display: flex;
+  width: 55%;
+  flex-wrap: wrap;
+  margin: 0 auto;
+  margin-top: 35px;
+  margin-bottom: 35px;
 }
 
