@@ -2,7 +2,6 @@ import React, { Component } from "react";
 
 import "./App.css";
 import Home from "./Components/Home";
-import Test from "./Components/Test";
 import AppTitle from "./Components/AppTitle";
 
 class App extends Component {

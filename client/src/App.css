@@ -1,6 +1,6 @@
 .container {
   max-width: 1000px; 
-  border: 2px inset red;
+  border: 2px inset blue;
   margin: 0 auto;
 }
 
@@ -39,3 +39,28 @@
   margin-bottom: 35px;
 }
 
+
+
+/* Media query  */
+@media (max-width: 500px){
+  /* App.js */
+  .keep-as-row {
+    display: block;
+    margin: 0 auto;
+  }
+
+  /* AppTitle.js */
+  .title {
+    font-size: 14vw;
+  }
+
+
+  /* Home.js */
+  .column {
+    width: 7vw;
+  }
+  .show-grid{
+    width: 81%;
+  }
+
+}
