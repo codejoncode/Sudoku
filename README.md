@@ -30,7 +30,7 @@ If we are successful at setting a new number, move forward increment backTracker
   
 
 
-![sudoku_solved_by_bactracking](https://user-images.githubusercontent.com/38900224/50551230-17042300-0c43-11e9-8ddd-802f09ab2d50.gif)
+
 
 
 
