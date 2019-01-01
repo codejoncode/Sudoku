@@ -5,7 +5,7 @@ class Cell extends Component {
 
     render () {
         return (
-            <div className = "column">{this.props.data.value}</div>
+            <div className = "column" style = {this.props.data.changable === false ? {fontWeight: 900} : {fontWeight: "normal"}  }>{this.props.data.value}</div>
         )
     }
 }

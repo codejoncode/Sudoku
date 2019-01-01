@@ -15,15 +15,17 @@ class ThreeByThree extends Component {
             group3 = this.props.group.slice(6,10);
         }
         return (
-            <div className = "s3x3">
+            <div className = "s3x3" style = {{background: this.props.color}}>
                 <div className = "row3x3">
                     {group1.map((cell, id) => <Cell key = {id} data ={cell} />)}
                 </div>
                 <div className = "row3x3">
                     {group2.map((cell, id) => <Cell key = {id} data ={cell} />)}
+                    
                 </div>
                 <div className = "row3x3">
                     {group3.map((cell, id) => <Cell key = {id} data ={cell} />)}
+                    
                 </div>
                 
             </div>
