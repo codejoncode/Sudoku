@@ -2,12 +2,14 @@
   max-width: 1000px; 
   border: 2px inset blue;
   margin: 0 auto;
+  
 }
 
 /* App.js */
 .small-container{
   width: 90%;
   margin: 0 auto;
+  
 }
 .keep-as-row {
   display: flex;
@@ -56,8 +58,21 @@
   background: grey;
 }
 
+/* Three By Three */
+.s3x3 {
+  width: 100%;
+  display: flex;
+}
+.row3x3 {
+  width: 100%;
+  display: flex; 
+  flex-direction: row;
+}
 
-
+.grid-container {
+  display: flex;
+  flex-wrap: wrap;
+}
 
 /* Media query  */
 @media (max-width: 500px){

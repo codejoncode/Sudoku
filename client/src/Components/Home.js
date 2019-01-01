@@ -1,6 +1,6 @@
 import React, { Component } from "react";
-import { Grid, Row, Col } from "react-bootstrap";
 import ThreeByThree from "./ThreeByThree";
+import Grid from "./Grid";
 class Home extends Component {
   state = {};
 
@@ -8,16 +8,17 @@ class Home extends Component {
     console.log(this.props);
     // const grid = this.props.grid.flat()
     return (
-      <div className = "container">
-        <ThreeByThree group = {this.props.group1}/>
-        <ThreeByThree group = {this.props.group2}/>
-        <ThreeByThree group = {this.props.group3}/>
-        <ThreeByThree group = {this.props.group4}/>
-        <ThreeByThree group = {this.props.group5}/>
-        <ThreeByThree group = {this.props.group6}/>
-        <ThreeByThree group = {this.props.group7}/>
-        <ThreeByThree group = {this.props.group8}/>
-        <ThreeByThree group = {this.props.group9}/>
+      <div className = "small-container">
+        <Grid  
+         group1 = {this.props.group1}
+         group2 = {this.props.group2}
+         group3 = {this.props.group3}
+         group4 = {this.props.group4}
+         group5 = {this.props.group5}
+         group6 = {this.props.group6}
+         group7 = {this.props.group7}
+         group8 = {this.props.group8}
+         group9 = {this.props.group9}/>
       </div>
     );
   }
