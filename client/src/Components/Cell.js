@@ -5,9 +5,7 @@ class Cell extends Component {
 
     render () {
         return (
-            <div className = "column">
-
-            </div>
+            <div className = "column">{this.props.data.value}</div>
         )
     }
 }

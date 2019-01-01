@@ -21,7 +21,16 @@ class App extends Component {
     ],
     colorsIndex: 0,
     grid: [],
-    board: []
+    board: [],
+    group1: [], 
+    group2: [], 
+    group3: [],
+    group4: [], 
+    group5: [],
+    group6: [], 
+    group7: [],
+    group8: [], 
+    group9: [], 
   };
 
   componentWillMount() {
@@ -165,7 +174,7 @@ class App extends Component {
         tempObj.repeated = false;
         board[row][col] = " ";
       }
-      tempObj.row = "row" + str((row) + 1);
+      tempObj.row = `row ${row + 1}`;
       tempObj.col = indexToColumn[startIndex];
       tempObj.group = indexToGroup[startIndex]; 
       tempObj.index = startIndex; 
@@ -191,6 +200,7 @@ class App extends Component {
     const group8 = [];
     const group9 = [];
     for (let obj of boardArray){
+      console.log(obj);
       switch(obj.group){
         case "group1":
           group1.push(obj);
@@ -223,6 +233,7 @@ class App extends Component {
           console.log(obj.group, "is not recognized");
       }
     }
+    console.log(group1, group2, group3, group4, group5, group6, group7, group8, group9);
     this.setState({
       board,
       group1,
@@ -1038,6 +1049,7 @@ class App extends Component {
   };
 
   render() {
+    console.log(this.state);
     return (
       <div className="container">
         <header className="App-header">
@@ -1081,6 +1093,15 @@ class App extends Component {
           <Home
             grid={this.state.board}
             color={this.state.colors[this.state.colorsIndex]}
+            group1 = {this.state.group1}
+            group2 = {this.state.group2}
+            group3 = {this.state.group3}
+            group4 = {this.state.group4}
+            group5 = {this.state.group5}
+            group6 = {this.state.group6}
+            group7 = {this.state.group7}
+            group8 = {this.state.group8}
+            group9 = {this.state.group9}
           />
         </div>
         <Numbers />

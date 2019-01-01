@@ -1,18 +1,24 @@
 import React, { Component } from "react";
 import { Grid, Row, Col } from "react-bootstrap";
+import ThreeByThree from "./ThreeByThree";
 class Home extends Component {
   state = {};
 
   render() {
-    const grid = this.props.grid.flat()
+    console.log(this.props);
+    // const grid = this.props.grid.flat()
     return (
-      <Grid>
-        <Row className="show-grid">
-          {grid.map((col, id) => (
-            <Col style = {{color: this.props.color}} className="column" key = {id}>{col}</Col>
-          ))}
-        </Row>
-      </Grid>
+      <div className = "container">
+        <ThreeByThree group = {this.props.group1}/>
+        <ThreeByThree group = {this.props.group2}/>
+        <ThreeByThree group = {this.props.group3}/>
+        <ThreeByThree group = {this.props.group4}/>
+        <ThreeByThree group = {this.props.group5}/>
+        <ThreeByThree group = {this.props.group6}/>
+        <ThreeByThree group = {this.props.group7}/>
+        <ThreeByThree group = {this.props.group8}/>
+        <ThreeByThree group = {this.props.group9}/>
+      </div>
     );
   }
 }
