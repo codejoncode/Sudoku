@@ -1,12 +1,24 @@
 import React, { Component } from "react";
 
 class Cell extends Component {
-    state = {}
+  state = {};
 
-    render () {
-        return (
-            <div className = "column" style = {this.props.data.changable === false ? {fontWeight: 900} : {fontWeight: "normal"}  }>{this.props.data.value}</div>
-        )
-    }
+  render() {
+    console.log(this.props)
+    return (
+      <div
+        className="column"
+        onMouseEnter = {event => this.props.onCellHover(event, this.props.data)}
+        onMouseLeave = {event => this.props.onCellHoverOut(event, this.props.data) }
+        style={
+          this.props.data.changable === false
+            ? { fontWeight: 900 }
+            : { fontWeight: "normal" }
+        }
+      >
+        {this.props.data.value}
+      </div>
+    );
+  }
 }
-export default Cell; 
+export default Cell;

@@ -177,7 +177,8 @@ class App extends Component {
       tempObj.row = `row ${row + 1}`;
       tempObj.col = indexToColumn[startIndex];
       tempObj.group = indexToGroup[startIndex]; 
-      tempObj.index = startIndex; 
+      tempObj.index = startIndex; //used to know exactly which cell to get back to
+      tempObj.clicked = false; // used to know if the cell is clicked or not. 
 
       boardArray.push(tempObj); 
       startIndex += 1;
@@ -1048,6 +1049,31 @@ class App extends Component {
     this.setState({ [event.target.name]: event.target.value });
   };
 
+  onCellHover = (event, cellData) => {
+    /*On cell hover will change the color of the cell to show that 
+      It can be changed.  Another function onCellClick will change the
+      back ground (permanately but temporary) allowing for the user to use
+      the number they wish to update the cell with after the cell is updated
+      the background will be removed. Of course all of this happens on the conditon
+      cellData.changable is true. Takes the event and the cellData as arguments.
+    */
+   console.log("entering cell")
+    if (cellData.changable){
+      console.log("changeable")
+      event.target.style.backgroundColor = "blue"; 
+    }
+  }
+  onCellHoverOut = (event, cellData) => {
+    /*This function is the aftermath of onCellHover changing the cell back. 
+      will turn the cell back to its parent with use of the inherit value as long as 
+      the cell has not been clicked which is conditionally check using the clicked key on the object.
+    */
+
+    if(cellData.clicked === false){
+      event.target.style.backgroundColor =  "inherit";
+    }
+  }
+
   render() {
     console.log(this.state);
     return (
@@ -1102,6 +1128,9 @@ class App extends Component {
             group7 = {this.state.group7}
             group8 = {this.state.group8}
             group9 = {this.state.group9}
+            // functions below
+            onCellHover = {this.onCellHover}
+            onCellHoverOut = {this.onCellHoverOut}
           />
         </div>
         <Numbers />

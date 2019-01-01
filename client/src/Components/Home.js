@@ -19,7 +19,11 @@ class Home extends Component {
          group6 = {this.props.group6}
          group7 = {this.props.group7}
          group8 = {this.props.group8}
-         group9 = {this.props.group9}/>
+         group9 = {this.props.group9}
+        //  functions 
+        onCellHover = {this.props.onCellHover}
+        onCellHoverOut = {this.props.onCellHoverOut}
+         />
       </div>
     );
   }
