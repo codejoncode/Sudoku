@@ -9,6 +9,7 @@ class Home extends Component {
     // const grid = this.props.grid.flat()
     return (
       <div className = "small-container">
+        <br/>
         <Grid  
          group1 = {this.props.group1}
          group2 = {this.props.group2}
