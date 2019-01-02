@@ -1090,6 +1090,15 @@ class App extends Component {
       this.setState(prevState => {
         return {cellClicked: true, currentCell: cellData, board }
       });
+    } else if (cellData.clicked){
+      cellData.clicked = false; 
+      const board = this.state.board.slice();
+      board[cellData.index -1] = cellData; 
+      // because cells are indexed 1-81 the position in the board array can be reached by taking the index
+      // minus 1 so that the state can be updated with the correct information. 
+      this.setState(prevState => {
+        return {cellClicked: false, currentCell: {}, board }
+      });
     }
   }
 
