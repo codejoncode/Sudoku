@@ -5,7 +5,6 @@ class ThreeByThree extends Component {
   state = {};
 
   render() {
-    console.log(this.props);
     let group1 = [];
     let group2 = [];
     let group3 = [];

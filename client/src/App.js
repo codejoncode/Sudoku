@@ -34,7 +34,8 @@ class App extends Component {
     cellClicked : false, 
     currentCell : {}, //upon clicked will set currentCell to the cell clicked
     numberClicked : false, 
-    currentNumber : false, 
+    currentNumber : false,
+    gameOver : false,
   };
 
   componentWillMount() {
@@ -205,7 +206,6 @@ class App extends Component {
     const group8 = [];
     const group9 = [];
     for (let obj of boardArray){
-      console.log(obj);
       switch(obj.group){
         case "group1":
           group1.push(obj);
@@ -1082,25 +1082,21 @@ class App extends Component {
       It will also change a propety on state cellClicked so that a user cannot click mutliple cells at 
       a time. 
     */
-   console.log(cellData);
+   
     if (this.state.cellClicked === false){
       cellData.clicked = true;
       const board = this.state.board.slice();
       board[cellData.index -1] = cellData; 
       // because cells are indexed 1-81 the position in the board array can be reached by taking the index
       // minus 1 so that the state can be updated with the correct information. 
-      this.setState(prevState => {
-        return {cellClicked: true, currentCell: cellData, board }
-      });
+      this.setState({cellClicked: true, currentCell: cellData, board }, () => this.updateCell());
     } else if (cellData.clicked){
       cellData.clicked = false; 
       const board = this.state.board.slice();
       board[cellData.index -1] = cellData; 
       // because cells are indexed 1-81 the position in the board array can be reached by taking the index
       // minus 1 so that the state can be updated with the correct information. 
-      this.setState(prevState => {
-        return {cellClicked: false, currentCell: {}, board }
-      });
+      this.setState({cellClicked: false, currentCell: {}, board });
     }
   }
 
@@ -1130,7 +1126,7 @@ class App extends Component {
       set the key on state to true, then it sets currentNumber to the number.  else it will set the key on state to false and 
       it sets the current number key on state to false. */
     if (this.state.numberClicked === false){
-      this.setState({numberClicked: true, currentNumber: number});
+      this.setState({numberClicked: true, currentNumber: number}, () => this.updateCell());
     } else {
       this.setState({numberClicked: false, currentNumber: false});
     }
@@ -1146,8 +1142,15 @@ class App extends Component {
       If it is a repeat,  repeated is changed to true and that cell value will be red to indicate 
       it is not a valid choice. 
     */
-    
+    console.log("updateCell checking")
+   
   }
+
+  gameComplete = () => {
+    /*This function will check if the game is complete and update the game over key on the state.  */
+
+  }
+  
 
   render() {
     console.log(this.state);

@@ -11,6 +11,7 @@ class Numbers extends Component {
           {numbers.map((number, id) => (
             <div
               className="number"
+              key = {id}
               onClick={() => this.props.onNumberClicked(number)}
               onMouseEnter={event => this.props.onNumberMouseIn(event, number)}
               onMouseLeave={event => this.props.onNumberMouseOut(event, number)}

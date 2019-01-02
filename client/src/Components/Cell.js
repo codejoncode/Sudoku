@@ -4,7 +4,7 @@ class Cell extends Component {
   state = {};
 
   render() {
-    console.log(this.props)
+    
     return (
       <div
         className= {this.props.data.repeated ? "column repeated" : "column"}

@@ -1,12 +1,9 @@
 import React, { Component } from "react";
-import ThreeByThree from "./ThreeByThree";
 import Grid from "./Grid";
 class Home extends Component {
   state = {};
 
   render() {
-    console.log(this.props);
-    // const grid = this.props.grid.flat()
     return (
       <div className = "small-container">
         <br/>
