@@ -7,7 +7,7 @@ class Cell extends Component {
     console.log(this.props)
     return (
       <div
-        className="column"
+        className= {this.props.data.repeated ? "column repeated" : "column"}
         onMouseEnter = {event => this.props.onCellHover(event, this.props.data)}
         onMouseLeave = {event => this.props.onCellHoverOut(event, this.props.data) }
         onClick = {() => this.props.onCellClick(this.props.data)}

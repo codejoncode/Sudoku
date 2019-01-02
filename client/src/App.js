@@ -1142,8 +1142,8 @@ class App extends Component {
       or vice versa a conditional check is performed to make sure numberClicked 
       and cellClicked keys on state are both true before anything is done. 
       Then the current number is placed as the value on the currenct cell updating the
-      board is done but only after a check for if the number is a duplicate for that section. 
-      If it is duplicate is changed to true and that cell value will be red to indicate 
+      board is done but only after a check for if the number is a repeat for that section. 
+      If it is a repeat,  repeated is changed to true and that cell value will be red to indicate 
       it is not a valid choice. 
     */
     
