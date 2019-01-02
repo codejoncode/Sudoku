@@ -23,6 +23,7 @@ class Home extends Component {
         //  functions 
         onCellHover = {this.props.onCellHover}
         onCellHoverOut = {this.props.onCellHoverOut}
+        onCellClick = {this.props.onCellClick}
          />
       </div>
     );

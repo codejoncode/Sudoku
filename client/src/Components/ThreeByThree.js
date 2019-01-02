@@ -22,6 +22,7 @@ class ThreeByThree extends Component {
               key={id}
               onCellHover={this.props.onCellHover}
               onCellHoverOut={this.props.onCellHoverOut}
+              onCellClick = {this.props.onCellClick}
               data={cell}
             />
           ))}
@@ -32,6 +33,7 @@ class ThreeByThree extends Component {
               key={id}
               onCellHover={this.props.onCellHover}
               onCellHoverOut={this.props.onCellHoverOut}
+              onCellClick = {this.props.onCellClick}
               data={cell}
             />
           ))}
@@ -42,6 +44,7 @@ class ThreeByThree extends Component {
               key={id}
               onCellHover={this.props.onCellHover}
               onCellHoverOut={this.props.onCellHoverOut}
+              onCellClick = {this.props.onCellClick}
               data={cell}
             />
           ))}

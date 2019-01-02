@@ -31,6 +31,8 @@ class App extends Component {
     group7: [],
     group8: [], 
     group9: [], 
+    cellClicked : false, 
+    currentCell : {}, //upon clicked will set currentCell to the cell clicked
   };
 
   componentWillMount() {
@@ -1056,10 +1058,9 @@ class App extends Component {
       the number they wish to update the cell with after the cell is updated
       the background will be removed. Of course all of this happens on the conditon
       cellData.changable is true. Takes the event and the cellData as arguments.
+      No other cell should be clicked for this feature to work. 
     */
-   console.log("entering cell")
-    if (cellData.changable){
-      console.log("changeable")
+    if (cellData.changable && this.state.cellClicked === false){
       event.target.style.backgroundColor = "blue"; 
     }
   }
@@ -1071,6 +1072,24 @@ class App extends Component {
 
     if(cellData.clicked === false){
       event.target.style.backgroundColor =  "inherit";
+    }
+  }
+
+  onCellClick = (cellData) => {
+    /*This function will set the cell as a blue background and update the object clicked key as true.
+      It will also change a propety on state cellClicked so that a user cannot click mutliple cells at 
+      a time. 
+    */
+   console.log(cellData);
+    if (this.state.cellClicked === false){
+      cellData.clicked = true;
+      const board = this.state.board.slice();
+      board[cellData.index -1] = cellData; 
+      // because cells are indexed 1-81 the position in the board array can be reached by taking the index
+      // minus 1 so that the state can be updated with the correct information. 
+      this.setState(prevState => {
+        return {cellClicked: true, currentCell: cellData, board }
+      });
     }
   }
 
@@ -1131,6 +1150,7 @@ class App extends Component {
             // functions below
             onCellHover = {this.onCellHover}
             onCellHoverOut = {this.onCellHoverOut}
+            onCellClick = {this.onCellClick}
           />
         </div>
         <Numbers />
