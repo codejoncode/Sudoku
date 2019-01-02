@@ -33,6 +33,8 @@ class App extends Component {
     group9: [], 
     cellClicked : false, 
     currentCell : {}, //upon clicked will set currentCell to the cell clicked
+    numberClicked : false, 
+    currentNumber : false, 
   };
 
   componentWillMount() {
@@ -1102,6 +1104,51 @@ class App extends Component {
     }
   }
 
+  onNumberMouseIn = (event, number) => {
+    /*The purpose of this function is to handle the hover of the numbers it will 
+      change the background color when the mouse enters the number. Just as long as
+      the numberClicked property on state is false. */
+    if(this.state.numberClicked === false){
+      event.target.style.cursor = "pointer"; 
+      event.target.style.backgroundColor = "blue";
+    }
+  }
+
+  onNumberMouseOut = (event, number) => {
+    /*The purpose of this function is to handle the hover of the numbers it will change
+      the color back to the pareent color just as long as the numberClicked key on state
+      is false.*/
+    if(this.state.numberClicked === false){
+      event.target.style.cursor = "inherit";
+      event.target.style.backgroundColor = "#00BAF6"; 
+    }
+  }
+
+  onNumberClicked = (number) => {
+    /*Purpose of this function is to handle the clicking of a number. As long as
+      number clicked key on state is false it will allow for a click of a number and 
+      set the key on state to true, then it sets currentNumber to the number.  else it will set the key on state to false and 
+      it sets the current number key on state to false. */
+    if (this.state.numberClicked === false){
+      this.setState({numberClicked: true, currentNumber: number});
+    } else {
+      this.setState({numberClicked: false, currentNumber: false});
+    }
+  }
+
+  updateCell = () => {
+    /*This function will handle the updating of the cells. 
+      to allow a user to click the cell on the board and then a number
+      or vice versa a conditional check is performed to make sure numberClicked 
+      and cellClicked keys on state are both true before anything is done. 
+      Then the current number is placed as the value on the currenct cell updating the
+      board is done but only after a check for if the number is a duplicate for that section. 
+      If it is duplicate is changed to true and that cell value will be red to indicate 
+      it is not a valid choice. 
+    */
+    
+  }
+
   render() {
     console.log(this.state);
     return (
@@ -1162,7 +1209,7 @@ class App extends Component {
             onCellClick = {this.onCellClick}
           />
         </div>
-        <Numbers />
+        <Numbers onNumberClicked = {this.onNumberClicked} onNumberMouseIn = {this.onNumberMouseIn} onNumberMouseOut = {this.onNumberMouseOut}/>
       </div>
     );
   }

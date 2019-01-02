@@ -1,6 +1,6 @@
 .container {
   max-width: 1000px; 
-  border: 2px inset blue;
+  border: 2px inset black;
   margin: 0 auto;
   
 }
@@ -20,8 +20,9 @@
 .title {
   text-align: center; 
   font-size: 14vh; 
-  color: #001A9E;
-  background: black;
+  /* color: #001A9E; */
+  color : #3894AC;
+  background: #06445F;
   box-shadow: 2px 3px;
 }
 
@@ -52,11 +53,12 @@
   height: 10vh;
   width: 4.5vw;
   text-align: center; 
+  background-color: #00BAF6;
 }
-.number:hover {
+/* .number:hover {
   cursor: pointer;
   background: grey;
-}
+} */
 
 /* Three By Three */
 .s3x3 {

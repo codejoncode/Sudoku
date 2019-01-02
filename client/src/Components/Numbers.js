@@ -4,20 +4,22 @@ class Numbers extends Component {
   state = {};
 
   render() {
+    const numbers = [1, 2, 3, 4, 5, 6, 7, 8, 9];
     return (
-    <div className = "small-container">
-      <div className = "number-row">
-        <div className="number">1</div>
-        <div className="number">2</div>
-        <div className="number">3</div>
-        <div className="number">4</div>
-        <div className="number">5</div>
-        <div className="number">6</div>
-        <div className="number">7</div>
-        <div className="number">8</div>
-        <div className="number">9</div>
+      <div className="small-container">
+        <div className="number-row">
+          {numbers.map((number, id) => (
+            <div
+              className="number"
+              onClick={() => this.props.onNumberClicked(number)}
+              onMouseEnter={event => this.props.onNumberMouseIn(event, number)}
+              onMouseLeave={event => this.props.onNumberMouseOut(event, number)}
+            >
+              {number}
+            </div>
+          ))}
+        </div>
       </div>
-    </div>
     );
   }
 }
