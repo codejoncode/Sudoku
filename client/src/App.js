@@ -153,8 +153,6 @@ class App extends Component {
       If difficulty is set to medium 27 cells of the grid will be revealed. 
       If difficulty is set to hard 18  cells of the grid will be revealed 
     */
-    // console.log(this.state.grid);
-    console.log(this.state.difficultyIndex);
     let revealing = 0;
     switch (Number(this.state.difficultyIndex)) {
       case 0:
@@ -1429,6 +1427,16 @@ class App extends Component {
       if(isThereARepeat){
         console.log(currentCell)
         console.log("Repeat happening")
+        console.log(this.state.group1)
+        console.log(this.state.group2)
+        console.log(this.state.group3)
+        console.log(this.state.group4)
+        console.log(this.state.group4)
+        console.log(this.state.group5)
+        console.log(this.state.group6)
+        console.log(this.state.group7)
+        console.log(this.state.group8)
+        console.log(this.state.group9)
         currentCell.repeated = true; 
       }
       const boardArray = this.state.boardArray.slice(); 
@@ -1462,17 +1470,7 @@ class App extends Component {
   }
 
   render() {
-    // console.log(this.state.grid);
-    // console.log(this.state.group1);
-    // console.log(this.state.group2);
-    // console.log(this.state.group3);
-    // console.log(this.state.group4);
-    // console.log(this.state.group5);
-    // console.log(this.state.group6);
-    // console.log(this.state.group7);
-    // console.log(this.state.group8);
-    // console.log(this.state.group9);
-    console.log(this.state.difficultyIndex);
+    console.log(this.state.grid);
     return (
       <div className="container">
         <header className="App-header">
