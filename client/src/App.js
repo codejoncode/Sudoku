@@ -154,8 +154,9 @@ class App extends Component {
       If difficulty is set to hard 18  cells of the grid will be revealed 
     */
     // console.log(this.state.grid);
+    console.log(this.state.difficultyIndex);
     let revealing = 0;
-    switch (this.state.difficultyIndex) {
+    switch (Number(this.state.difficultyIndex)) {
       case 0:
         revealing = 45;
         break;
@@ -699,6 +700,7 @@ class App extends Component {
 
   createBoard = () => {
     /*This will create the game board */
+    console.log("new board")
     const grid = [
       [0, 0, 0, 0, 0, 0, 0, 0, 0],
       [0, 0, 0, 0, 0, 0, 0, 0, 0],
@@ -1454,24 +1456,30 @@ class App extends Component {
     /*This function will check if the game is complete and update the game over key on the state.  */
   };
 
+  adjustDifficulty = event => {
+    /*This will set the difficulty index and then recreate the board*/
+    this.setState({ [event.target.name]: event.target.value }, this.createBoard());
+  }
+
   render() {
-    console.log(this.state.grid);
-    console.log(this.state.group1);
-    console.log(this.state.group2);
-    console.log(this.state.group3);
-    console.log(this.state.group4);
-    console.log(this.state.group5);
-    console.log(this.state.group6);
-    console.log(this.state.group7);
-    console.log(this.state.group8);
-    console.log(this.state.group9);
+    // console.log(this.state.grid);
+    // console.log(this.state.group1);
+    // console.log(this.state.group2);
+    // console.log(this.state.group3);
+    // console.log(this.state.group4);
+    // console.log(this.state.group5);
+    // console.log(this.state.group6);
+    // console.log(this.state.group7);
+    // console.log(this.state.group8);
+    // console.log(this.state.group9);
+    console.log(this.state.difficultyIndex);
     return (
       <div className="container">
         <header className="App-header">
           <AppTitle />
         </header>
         <div className="small-container keep-as-row">
-          <button className="new-game game-button">New Game</button>
+          <button className="new-game game-button" onClick = {this.createBoard}>New Game</button>
           <br />
           <div className="keep-as-row">
             <h5>
@@ -1500,7 +1508,7 @@ class App extends Component {
               id="myRange"
               name="colorsIndex"
               value={this.state.colorsIndex}
-              onChange={this.handleChange}
+              onChange={this.adjustDifficulty}
             />
           </div>
         </div>
