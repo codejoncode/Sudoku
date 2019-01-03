@@ -1480,6 +1480,7 @@ class App extends Component {
         </header>
         <div className="small-container keep-as-row">
           <button className="new-game game-button" onClick = {this.createBoard}>New Game</button>
+          {/* <button className = "new-game game-button">Solver Grid</button>  */}
           <br />
           <div className="keep-as-row">
             <h5>
@@ -1493,29 +1494,14 @@ class App extends Component {
               id="myRange"
               name="difficultyIndex"
               value={this.state.difficultyIndex}
-              onChange={this.handleChange}
-            />
-          </div>
-          <div className="keep-as-row">
-            <h5 style={{ color: this.state.colors[this.state.colorsIndex] }}>
-              Number Color {this.state.colors[this.state.colorsIndex]}
-            </h5>
-            <input
-              type="range"
-              min="0"
-              max="7"
-              className="slider"
-              id="myRange"
-              name="colorsIndex"
-              value={this.state.colorsIndex}
               onChange={this.adjustDifficulty}
             />
           </div>
+        
         </div>
         <div className="small-container">
           <Home
             grid={this.state.board}
-            color={this.state.colors[this.state.colorsIndex]}
             group1={this.state.group1}
             group2={this.state.group2}
             group3={this.state.group3}
