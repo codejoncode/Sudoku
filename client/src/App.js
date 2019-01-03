@@ -153,7 +153,7 @@ class App extends Component {
       If difficulty is set to medium 27 cells of the grid will be revealed. 
       If difficulty is set to hard 18  cells of the grid will be revealed 
     */
-    console.log(this.state.grid);
+    // console.log(this.state.grid);
     let revealing = 0;
     switch (this.state.difficultyIndex) {
       case 0:
@@ -183,7 +183,6 @@ class App extends Component {
       board[i] = this.state.grid[i].slice();
     }
     // removed back tracker so make backTracker equal this.state.backTracker
-    console.log(revealingIndexs);
     const indexToGroup = {
       1: "group1",
       2: "group1",
@@ -375,8 +374,7 @@ class App extends Component {
       boardArray.push(tempObj);
       startIndex += 1;
     } //end of while loop
-    console.log(board);
-    console.log(this.state.grid);
+    
     this.putGroupsTogether(board, boardArray);
   };
 
@@ -504,17 +502,6 @@ class App extends Component {
           console.log(obj.row, "is not recognized");
       }
     }
-    console.log(
-      group1,
-      group2,
-      group3,
-      group4,
-      group5,
-      group6,
-      group7,
-      group8,
-      group9
-    );
     this.setState({
       // cellClicked: false, 
       // numberClicked: false,
@@ -627,7 +614,7 @@ class App extends Component {
     /*Checks to see if value is needed in section
          section should be an array and toBeAdded should be an integer
          returns true or false performs a check for if section is an array. */
-    console.log(section);
+    
     let valid = false;
     Array.isArray(section)
       ? (valid = true)
@@ -1224,7 +1211,7 @@ class App extends Component {
       /*maxInput is where each column is 45 * 9 */
       let attempts = 0; // start attempts at 0 each time.
       const value = numbers.slice(numbersIndex, numbersIndex + 1); //Value is an array of 1 elements.
-      console.log(backTrackerIndex);
+      
       const doesSectionNeedValue =
         this.valueNeeded(indexToGroup[backTrackerIndex], value[0], 932) &&
         this.valueNeeded(indexToColumn[backTrackerIndex], value[0], 933) &&
@@ -1262,7 +1249,7 @@ class App extends Component {
         backTrackerIndex -= 1; // decrement/backtrack reset the previous.
       }
     } // end of primary while loop
-    console.log(grid);
+    
     this.setState({ grid }, () => {
       this.setUpPlayingBoard();
     });
@@ -1309,11 +1296,11 @@ class App extends Component {
       
       currentCell.clicked = true;
       
-      boardArray[cellData.index - 1] = currentCell;
+      boardArray[currentCell.index - 1] = currentCell;
       // because cells are indexed 1-81 the position in the board array can be reached by taking the index
       // minus 1 so that the state can be updated with the correct information.
       this.setState({ cellClicked: true, currentCell, boardArray, }, () => {
-        this.callTwoFunctions()
+        this.callTwoFunctions(boardArray)
       }
       );
     } else if (currentCell.clicked) {
@@ -1353,6 +1340,7 @@ class App extends Component {
       it sets the current number key on state to false. */
     if (this.state.numberClicked === false) {
       this.setState({ numberClicked: true, currentNumber: number }, () =>
+        // this.callTwoFunctions(this.state.boardArray.slice())
         this.updateCell()
       );
     } else {
@@ -1360,17 +1348,18 @@ class App extends Component {
     }
   };
 
-  callTwoFunctions = () => {
+  callTwoFunctions = (boardArray) => {
     this.updateCell();
-    this.putGroupsTogether(this.state.board, this.state.boardArray); 
+    this.putGroupsTogether(this.state.board, boardArray); 
   }
+  
   checkForRepeats = (row, col, group, value) => {
     /*
       Four paramaters accepted row col group value functions purpose is to return true or false for if their are repeats. 
       if false is returned this means no repeats which is good for the board.  True means there is repeats for that section.
       This is bad for the board. this function is used with updateCell and called inside of it. 
     */
-    console.log("Repeats: ", row, col, group, value);
+    
     const groups = {
       group1: this.state.group1.slice().map(take => take.value),
       group2: this.state.group2.slice().map(take => take.value),
@@ -1383,7 +1372,7 @@ class App extends Component {
       group9: this.state.group9.slice().map(take => take.value)
     };
     const groupRepeat = groups[group].includes(value);//false if no repeat
-    console.log("repeat check", groups[group]); 
+     
     const rows = {
       row1: this.state.row1.slice().map(take => take.value),
       row2: this.state.row2.slice().map(take => take.value),
@@ -1396,7 +1385,7 @@ class App extends Component {
       row9: this.state.row9.slice().map(take => take.value)
     };
     const rowRepeat = rows[row].includes(value);// false  if no repeat
-    console.log("repeat check", rows[row]);
+    
     const cols = {
       col1: this.state.col1.slice().map(take => take.value),
       col2: this.state.col2.slice().map(take => take.value),
@@ -1409,11 +1398,6 @@ class App extends Component {
       col9: this.state.col9.slice().map(take => take.value)
     };
     const colRepeat = cols[col].includes(value);//false if no repeat. 
-    console.log("repeat check", cols[col]);
-    console.log("results of includes check");
-    console.log(groupRepeat);
-    console.log(rowRepeat);
-    console.log(colRepeat);
     return groupRepeat || rowRepeat || colRepeat // will return true if one of them is true  false only if all are false. 
   };
 
@@ -1429,7 +1413,7 @@ class App extends Component {
     */
     if (this.state.numberClicked && this.state.cellClicked) {
       const currentCell = JSON.parse(JSON.stringify(this.state.currentCell)); // deep copy
-      console.log(currentCell, "copied object on state all conditions true");
+      
       currentCell.value = this.state.currentNumber; //set the value key to curent number.
 
       //Scan to make sure that is a valid move if it isn't set repeated to true on the currentCell object.
@@ -1439,8 +1423,10 @@ class App extends Component {
         (currentCell.group),
         (this.state.currentNumber)
       );
-      console.log(isThereARepeat)
+      
       if(isThereARepeat){
+        console.log(currentCell)
+        console.log("Repeat happening")
         currentCell.repeated = true; 
       }
       const boardArray = this.state.boardArray.slice(); 
@@ -1451,8 +1437,15 @@ class App extends Component {
         column.style.backgroundColor = "inherit";
         column.style.cursor = "inherit";
       }
+
+      const numbers = document.querySelectorAll(".number");
+      for (let number of numbers){
+        number.style.cursor = "inherit";
+        number.style.backgroundColor = "#00BAF6";
+      }
+
       
-      this.setState({currentCell: {}, numberClicked : false, cellClicked : false, boardArray}, this.putGroupsTogether(this.state.board, boardArray))
+      this.setState({currentCell: {}, numberClicked : false, cellClicked : false, boardArray}, () => this.putGroupsTogether(this.state.board, boardArray))
     }// end of if conditional. 
 
   };
@@ -1463,6 +1456,15 @@ class App extends Component {
 
   render() {
     console.log(this.state.grid);
+    console.log(this.state.group1);
+    console.log(this.state.group2);
+    console.log(this.state.group3);
+    console.log(this.state.group4);
+    console.log(this.state.group5);
+    console.log(this.state.group6);
+    console.log(this.state.group7);
+    console.log(this.state.group8);
+    console.log(this.state.group9);
     return (
       <div className="container">
         <header className="App-header">
