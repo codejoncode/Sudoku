@@ -19,7 +19,8 @@ class App extends Component {
       "orange",
       "yellow"
     ],
-    backTracker :{/*Purpose is to locate the exact spot of the grid. Purpose of backTracker 
+    backTracker: {
+      /*Purpose is to locate the exact spot of the grid. Purpose of backTracker 
       is to iterate through the pointers to the grid to make the change. I will also decrement 
       to redo previous if there is a problem with a current position  */
       1: [0, 0],
@@ -107,20 +108,39 @@ class App extends Component {
     colorsIndex: 0,
     grid: [],
     board: [],
-    group1: [], 
-    group2: [], 
+    boardArray: [], 
+    group1: [],
+    group2: [],
     group3: [],
-    group4: [], 
+    group4: [],
     group5: [],
-    group6: [], 
+    group6: [],
     group7: [],
-    group8: [], 
-    group9: [], 
-    cellClicked : false, 
-    currentCell : {}, //upon clicked will set currentCell to the cell clicked
-    numberClicked : false, 
-    currentNumber : false,
-    gameOver : false,
+    group8: [],
+    group9: [],
+    col1: [],
+    col2: [],
+    col3: [],
+    col4: [],
+    col5: [],
+    col6: [],
+    col7: [],
+    col8: [],
+    col9: [],
+    row1: [],
+    row2: [],
+    row3: [],
+    row4: [],
+    row5: [],
+    row6: [],
+    row7: [],
+    row8: [],
+    row9: [],
+    cellClicked: false,
+    currentCell: {}, //upon clicked will set currentCell to the cell clicked
+    numberClicked: false,
+    currentNumber: false,
+    gameOver: false
   };
 
   componentWillMount() {
@@ -164,10 +184,174 @@ class App extends Component {
     }
     // removed back tracker so make backTracker equal this.state.backTracker
     console.log(revealingIndexs);
-    const indexToGroup ={ 1: "group1",2: "group1",3: "group1",4: "group2",5: "group2", 6: "group2", 7: "group3",8: "group3",9: "group3",10: "group1",11: "group1",12: "group1",13: "group2",14: "group2",15: "group2",16: "group3",17: "group3",18: "group3",19: "group1",20: "group1",21: "group1",22: "group2",23: "group2",24: "group2",25: "group3",26: "group3",27: "group3",28: "group4",29: "group4",30: "group4",31: "group5",32: "group5",33: "group5",34: "group6",35: "group6",36: "group6",37: "group4",38: "group4",39: "group4",40: "group5",41: "group5",42: "group5",43: "group6",44: "group6",45: "group6",46: "group4",47: "group4",48: "group4",49: "group5",50: "group5",51: "group5",52: "group6",53: "group6",54: "group6",55: "group7",56: "group7",57: "group7",58: "group8",59: "group8",60: "group8",61: "group9",62: "group9",63: "group9",64: "group7",65: "group7",66: "group7",67: "group8",68: "group8",69: "group8",70: "group9",71: "group9",72: "group9",73: "group7",74: "group7",75: "group7",76: "group8",77: "group8",78: "group8",79: "group9",80: "group9",81: "group9",};
-    const indexToColumn = {1: "column1",2: "column2",3: "column3",4: "column4",5: "column5",6: "column6",7: "column7",8: "column8",9: "column9",10: "column1",11: "column2",12: "column3",13: "column4",14: "column5",15: "column6",16: "column7",17: "column8",18: "column9",19: "column1",20: "column2",21: "column3",22: "column4",23: "column5",24: "column6",25: "column7",26: "column8",27: "column9",28: "column1",29: "column2",30: "column3",31: "column4",32: "column5",33: "column6",34: "column7",35: "column8",36: "column9",37: "column1",38: "column2",39: "column3",40: "column4",41: "column5",42: "column6",43: "column7",44: "column8",45: "column9",46: "column1",47: "column2",48: "column3",49: "column4",50: "column5",51: "column6",52: "column7",53: "column8",54: "column9",55: "column1",56: "column2",57: "column3",58: "column4",59: "column5",60: "column6",61: "column7",62: "column8",63: "column9",64: "column1",65: "column2",66: "column3",67: "column4",68: "column5",69: "column6",70: "column7",71: "column8",72: "column9",73: "column1",74: "column2",75: "column3",76: "column4",77: "column5",78: "column6",79: "column7",80: "column8",81: "column9",}; 
+    const indexToGroup = {
+      1: "group1",
+      2: "group1",
+      3: "group1",
+      4: "group2",
+      5: "group2",
+      6: "group2",
+      7: "group3",
+      8: "group3",
+      9: "group3",
+      10: "group1",
+      11: "group1",
+      12: "group1",
+      13: "group2",
+      14: "group2",
+      15: "group2",
+      16: "group3",
+      17: "group3",
+      18: "group3",
+      19: "group1",
+      20: "group1",
+      21: "group1",
+      22: "group2",
+      23: "group2",
+      24: "group2",
+      25: "group3",
+      26: "group3",
+      27: "group3",
+      28: "group4",
+      29: "group4",
+      30: "group4",
+      31: "group5",
+      32: "group5",
+      33: "group5",
+      34: "group6",
+      35: "group6",
+      36: "group6",
+      37: "group4",
+      38: "group4",
+      39: "group4",
+      40: "group5",
+      41: "group5",
+      42: "group5",
+      43: "group6",
+      44: "group6",
+      45: "group6",
+      46: "group4",
+      47: "group4",
+      48: "group4",
+      49: "group5",
+      50: "group5",
+      51: "group5",
+      52: "group6",
+      53: "group6",
+      54: "group6",
+      55: "group7",
+      56: "group7",
+      57: "group7",
+      58: "group8",
+      59: "group8",
+      60: "group8",
+      61: "group9",
+      62: "group9",
+      63: "group9",
+      64: "group7",
+      65: "group7",
+      66: "group7",
+      67: "group8",
+      68: "group8",
+      69: "group8",
+      70: "group9",
+      71: "group9",
+      72: "group9",
+      73: "group7",
+      74: "group7",
+      75: "group7",
+      76: "group8",
+      77: "group8",
+      78: "group8",
+      79: "group9",
+      80: "group9",
+      81: "group9"
+    };
+    const indexToColumn = {
+      1: "col1",
+      2: "col2",
+      3: "col3",
+      4: "col4",
+      5: "col5",
+      6: "col6",
+      7: "col7",
+      8: "col8",
+      9: "col9",
+      10: "col1",
+      11: "col2",
+      12: "col3",
+      13: "col4",
+      14: "col5",
+      15: "col6",
+      16: "col7",
+      17: "col8",
+      18: "col9",
+      19: "col1",
+      20: "col2",
+      21: "col3",
+      22: "col4",
+      23: "col5",
+      24: "col6",
+      25: "col7",
+      26: "col8",
+      27: "col9",
+      28: "col1",
+      29: "col2",
+      30: "col3",
+      31: "col4",
+      32: "col5",
+      33: "col6",
+      34: "col7",
+      35: "col8",
+      36: "col9",
+      37: "col1",
+      38: "col2",
+      39: "col3",
+      40: "col4",
+      41: "col5",
+      42: "col6",
+      43: "col7",
+      44: "col8",
+      45: "col9",
+      46: "col1",
+      47: "col2",
+      48: "col3",
+      49: "col4",
+      50: "col5",
+      51: "col6",
+      52: "col7",
+      53: "col8",
+      54: "col9",
+      55: "col1",
+      56: "col2",
+      57: "col3",
+      58: "col4",
+      59: "col5",
+      60: "col6",
+      61: "col7",
+      62: "col8",
+      63: "col9",
+      64: "col1",
+      65: "col2",
+      66: "col3",
+      67: "col4",
+      68: "col5",
+      69: "col6",
+      70: "col7",
+      71: "col8",
+      72: "col9",
+      73: "col1",
+      74: "col2",
+      75: "col3",
+      76: "col4",
+      77: "col5",
+      78: "col6",
+      79: "col7",
+      80: "col8",
+      81: "col9"
+    };
     let startIndex = 1;
-    const boardArray = []; 
+    const boardArray = [];
     while (startIndex < 82) {
       const tempObj = {};
       const row = this.state.backTracker[startIndex][0];
@@ -182,13 +366,13 @@ class App extends Component {
         tempObj.repeated = false;
         board[row][col] = " ";
       }
-      tempObj.row = `row ${row + 1}`;
+      tempObj.row = `row${row + 1}`;
       tempObj.col = indexToColumn[startIndex];
-      tempObj.group = indexToGroup[startIndex]; 
+      tempObj.group = indexToGroup[startIndex];
       tempObj.index = startIndex; //used to know exactly which cell to get back to
-      tempObj.clicked = false; // used to know if the cell is clicked or not. 
+      tempObj.clicked = false; // used to know if the cell is clicked or not.
 
-      boardArray.push(tempObj); 
+      boardArray.push(tempObj);
       startIndex += 1;
     } //end of while loop
     console.log(board);
@@ -197,8 +381,7 @@ class App extends Component {
   };
 
   putGroupsTogether = (board, boardArray) => {
-    /*This function will put the groups for the grid */
-    // const grid = this.state.grid.slice(); // replace this with the actual grid that has blank places.
+    /*This function will put the groups for the grid together */
     const group1 = [];
     const group2 = [];
     const group3 = [];
@@ -208,42 +391,120 @@ class App extends Component {
     const group7 = [];
     const group8 = [];
     const group9 = [];
-    for (let obj of boardArray){
-      switch(obj.group){
+    const col1 = [];
+    const col2 = [];
+    const col3 = [];
+    const col4 = [];
+    const col5 = [];
+    const col6 = [];
+    const col7 = [];
+    const col8 = [];
+    const col9 = [];
+    const row1 = [];
+    const row2 = [];
+    const row3 = [];
+    const row4 = [];
+    const row5 = [];
+    const row6 = [];
+    const row7 = [];
+    const row8 = [];
+    const row9 = [];
+    for (let obj of boardArray) {
+      switch (obj.group) {
         case "group1":
           group1.push(obj);
           break;
         case "group2":
           group2.push(obj);
-          break; 
+          break;
         case "group3":
           group3.push(obj);
-          break; 
+          break;
         case "group4":
-          group4.push(obj); 
-          break; 
+          group4.push(obj);
+          break;
         case "group5":
-          group5.push(obj); 
-          break; 
+          group5.push(obj);
+          break;
         case "group6":
-          group6.push(obj); 
-          break; 
+          group6.push(obj);
+          break;
         case "group7":
-          group7.push(obj); 
-          break; 
+          group7.push(obj);
+          break;
         case "group8":
           group8.push(obj);
-          break; 
+          break;
         case "group9":
           group9.push(obj);
-          break; 
+          break;
         default:
           console.log(obj.group, "is not recognized");
       }
+      switch (obj.col) {
+        case "col1":
+          col1.push(obj);
+          break;
+        case "col2":
+          col2.push(obj);
+          break;
+        case "col3":
+          col3.push(obj);
+          break;
+        case "col4":
+          col4.push(obj);
+          break;
+        case "col5":
+          col5.push(obj);
+          break;
+        case "col6":
+          col6.push(obj);
+          break;
+        case "col7":
+          col7.push(obj);
+          break;
+        case "col8":
+          col8.push(obj);
+          break;
+        case "col9":
+          col9.push(obj);
+          break;
+        default:
+          console.log(obj.col, "is not recognized");
+      }
+      switch (obj.row) {
+        case "row1":
+          row1.push(obj);
+          break;
+        case "row2":
+          row2.push(obj);
+          break;
+        case "row3":
+          row3.push(obj);
+          break;
+        case "row4":
+          row4.push(obj);
+          break;
+        case "row5":
+          row5.push(obj);
+          break;
+        case "row6":
+          row6.push(obj);
+          break;
+        case "row7":
+          row7.push(obj);
+          break;
+        case "row8":
+          row8.push(obj);
+          break;
+        case "row9":
+          row9.push(obj);
+          break;
+        default:
+          console.log(obj.row, "is not recognized");
+      }
     }
-    console.log(group1, group2, group3, group4, group5, group6, group7, group8, group9);
-    this.setState({
-      board,
+    console.log(
       group1,
       group2,
       group3,
@@ -253,6 +514,39 @@ class App extends Component {
       group7,
       group8,
       group9
+    );
+    this.setState({
+      // cellClicked: false, 
+      // numberClicked: false,
+      board,
+      boardArray,
+      group1,
+      group2,
+      group3,
+      group4,
+      group5,
+      group6,
+      group7,
+      group8,
+      group9,
+      col1,
+      col2,
+      col3,
+      col4,
+      col5,
+      col6,
+      col7,
+      col8,
+      col9,
+      row1,
+      row2,
+      row3,
+      row4,
+      row5,
+      row6,
+      row7,
+      row8,
+      row9,
     });
   };
 
@@ -333,7 +627,7 @@ class App extends Component {
     /*Checks to see if value is needed in section
          section should be an array and toBeAdded should be an integer
          returns true or false performs a check for if section is an array. */
-    console.log(section); 
+    console.log(section);
     let valid = false;
     Array.isArray(section)
       ? (valid = true)
@@ -429,7 +723,6 @@ class App extends Component {
       [0, 0, 0, 0, 0, 0, 0, 0, 0],
       [0, 0, 0, 0, 0, 0, 0, 0, 0]
     ];
-    
 
     const maxInput = 405;
 
@@ -457,11 +750,11 @@ class App extends Component {
         grid[7],
         grid[8],
         grid[9]
-      ) !== maxInput 
+      ) !== maxInput
       // ||
       //this.state.backTracker > 81 //This line was done on accdient but doesn't make sense
       //when i put it to the correct && backTrackerIndex > 81 it doesn't work need to research this.
-      //however right now doesn't seem to be needed.  
+      //however right now doesn't seem to be needed.
     ) {
       /*There are three neccessary areas to check
       horizontal sections  which go east and west, or side to side. 
@@ -935,7 +1228,7 @@ class App extends Component {
       const doesSectionNeedValue =
         this.valueNeeded(indexToGroup[backTrackerIndex], value[0], 932) &&
         this.valueNeeded(indexToColumn[backTrackerIndex], value[0], 933) &&
-        this.valueNeeded(indexToRow[backTrackerIndex], value[0],934);
+        this.valueNeeded(indexToRow[backTrackerIndex], value[0], 934);
       /*a && b && c  will return true only if all are true if even one is false it will return false. */
       if (doesSectionNeedValue) {
         const row = this.state.backTracker[backTrackerIndex][0]; //get the row from backTracker.
@@ -952,7 +1245,7 @@ class App extends Component {
           const doesSectionNeedValue =
             this.valueNeeded(indexToGroup[backTrackerIndex], value[0], 949) &&
             this.valueNeeded(indexToColumn[backTrackerIndex], value[0], 950) &&
-            this.valueNeeded(indexToRow[backTrackerIndex], value[0],951);
+            this.valueNeeded(indexToRow[backTrackerIndex], value[0], 951);
           if (doesSectionNeedValue) {
             const row = this.state.backTracker[backTrackerIndex][0]; //get the row from backTracker.
             const col = this.state.backTracker[backTrackerIndex][1]; // get the col from backTracker.
@@ -988,75 +1281,141 @@ class App extends Component {
       cellData.changable is true. Takes the event and the cellData as arguments.
       No other cell should be clicked for this feature to work. 
     */
-    if (cellData.changable && this.state.cellClicked === false){
-      event.target.style.backgroundColor = "blue"; 
+    if (cellData.changable && this.state.cellClicked === false) {
+      event.target.style.backgroundColor = "blue";
+      event.target.style.cursor = "pointer"; 
     }
-  }
+  };
   onCellHoverOut = (event, cellData) => {
     /*This function is the aftermath of onCellHover changing the cell back. 
       will turn the cell back to its parent with use of the inherit value as long as 
       the cell has not been clicked which is conditionally check using the clicked key on the object.
     */
 
-    if(cellData.clicked === false){
-      event.target.style.backgroundColor =  "inherit";
+    if (this.state.cellClicked === false) {
+      event.target.style.backgroundColor = "inherit";
+      event.target.style.cursor = "inherit"; 
     }
-  }
+  };
 
-  onCellClick = (cellData) => {
+  onCellClick = (event, cellData) => {
     /*This function will set the cell as a blue background and update the object clicked key as true.
       It will also change a propety on state cellClicked so that a user cannot click mutliple cells at 
       a time. 
     */
-   
-    if (this.state.cellClicked === false){
-      cellData.clicked = true;
-      const board = this.state.board.slice();
-      board[cellData.index -1] = cellData; 
+   const currentCell = JSON.parse(JSON.stringify(cellData)); // deep copy
+   const boardArray = this.state.boardArray.slice();
+    if (this.state.cellClicked === false) {
+      
+      currentCell.clicked = true;
+      
+      boardArray[cellData.index - 1] = currentCell;
       // because cells are indexed 1-81 the position in the board array can be reached by taking the index
-      // minus 1 so that the state can be updated with the correct information. 
-      this.setState({cellClicked: true, currentCell: cellData, board }, () => this.updateCell());
-    } else if (cellData.clicked){
-      cellData.clicked = false; 
-      const board = this.state.board.slice();
-      board[cellData.index -1] = cellData; 
+      // minus 1 so that the state can be updated with the correct information.
+      this.setState({ cellClicked: true, currentCell, boardArray, }, () => {
+        this.callTwoFunctions()
+      }
+      );
+    } else if (currentCell.clicked) {
+      currentCell.clicked = false;
+      boardArray[currentCell.index - 1] = currentCell;
       // because cells are indexed 1-81 the position in the board array can be reached by taking the index
-      // minus 1 so that the state can be updated with the correct information. 
-      this.setState({cellClicked: false, currentCell: {}, board });
+      // minus 1 so that the state can be updated with the correct information.
+      this.setState({ cellClicked: false, currentCell: {}, boardArray }, () => this.putGroupsTogether(this.state.board, boardArray));
     }
-  }
+  };
 
   onNumberMouseIn = (event, number) => {
     /*The purpose of this function is to handle the hover of the numbers it will 
       change the background color when the mouse enters the number. Just as long as
       the numberClicked property on state is false. */
-    if(this.state.numberClicked === false){
-      event.target.style.cursor = "pointer"; 
+    if (this.state.numberClicked === false) {
+      event.target.style.cursor = "pointer";
       event.target.style.backgroundColor = "blue";
+      
     }
-  }
+  };
 
   onNumberMouseOut = (event, number) => {
     /*The purpose of this function is to handle the hover of the numbers it will change
       the color back to the pareent color just as long as the numberClicked key on state
       is false.*/
-    if(this.state.numberClicked === false){
+    if (this.state.numberClicked === false) {
       event.target.style.cursor = "inherit";
-      event.target.style.backgroundColor = "#00BAF6"; 
+      event.target.style.backgroundColor = "#00BAF6";
     }
-  }
+  };
 
-  onNumberClicked = (number) => {
+  onNumberClicked = number => {
     /*Purpose of this function is to handle the clicking of a number. As long as
       number clicked key on state is false it will allow for a click of a number and 
       set the key on state to true, then it sets currentNumber to the number.  else it will set the key on state to false and 
       it sets the current number key on state to false. */
-    if (this.state.numberClicked === false){
-      this.setState({numberClicked: true, currentNumber: number}, () => this.updateCell());
+    if (this.state.numberClicked === false) {
+      this.setState({ numberClicked: true, currentNumber: number }, () =>
+        this.updateCell()
+      );
     } else {
-      this.setState({numberClicked: false, currentNumber: false});
+      this.setState({ numberClicked: false, currentNumber: false });
     }
+  };
+
+  callTwoFunctions = () => {
+    this.updateCell();
+    this.putGroupsTogether(this.state.board, this.state.boardArray); 
   }
+  checkForRepeats = (row, col, group, value) => {
+    /*
+      Four paramaters accepted row col group value functions purpose is to return true or false for if their are repeats. 
+      if false is returned this means no repeats which is good for the board.  True means there is repeats for that section.
+      This is bad for the board. this function is used with updateCell and called inside of it. 
+    */
+    console.log("Repeats: ", row, col, group, value);
+    const groups = {
+      group1: this.state.group1.slice().map(take => take.value),
+      group2: this.state.group2.slice().map(take => take.value),
+      group3: this.state.group3.slice().map(take => take.value),
+      group4: this.state.group4.slice().map(take => take.value),
+      group5: this.state.group5.slice().map(take => take.value),
+      group6: this.state.group6.slice().map(take => take.value),
+      group7: this.state.group7.slice().map(take => take.value),
+      group8: this.state.group8.slice().map(take => take.value),
+      group9: this.state.group9.slice().map(take => take.value)
+    };
+    const groupRepeat = groups[group].includes(value);//false if no repeat
+    console.log("repeat check", groups[group]); 
+    const rows = {
+      row1: this.state.row1.slice().map(take => take.value),
+      row2: this.state.row2.slice().map(take => take.value),
+      row3: this.state.row3.slice().map(take => take.value),
+      row4: this.state.row4.slice().map(take => take.value),
+      row5: this.state.row5.slice().map(take => take.value),
+      row6: this.state.row6.slice().map(take => take.value),
+      row7: this.state.row7.slice().map(take => take.value),
+      row8: this.state.row8.slice().map(take => take.value),
+      row9: this.state.row9.slice().map(take => take.value)
+    };
+    const rowRepeat = rows[row].includes(value);// false  if no repeat
+    console.log("repeat check", rows[row]);
+    const cols = {
+      col1: this.state.col1.slice().map(take => take.value),
+      col2: this.state.col2.slice().map(take => take.value),
+      col3: this.state.col3.slice().map(take => take.value),
+      col4: this.state.col4.slice().map(take => take.value),
+      col5: this.state.col5.slice().map(take => take.value),
+      col6: this.state.col6.slice().map(take => take.value),
+      col7: this.state.col7.slice().map(take => take.value),
+      col8: this.state.col8.slice().map(take => take.value),
+      col9: this.state.col9.slice().map(take => take.value)
+    };
+    const colRepeat = cols[col].includes(value);//false if no repeat. 
+    console.log("repeat check", cols[col]);
+    console.log("results of includes check");
+    console.log(groupRepeat);
+    console.log(rowRepeat);
+    console.log(colRepeat);
+    return groupRepeat || rowRepeat || colRepeat // will return true if one of them is true  false only if all are false. 
+  };
 
   updateCell = () => {
     /*This function will handle the updating of the cells. 
@@ -1068,19 +1427,42 @@ class App extends Component {
       If it is a repeat,  repeated is changed to true and that cell value will be red to indicate 
       it is not a valid choice. 
     */
+    if (this.state.numberClicked && this.state.cellClicked) {
+      const currentCell = JSON.parse(JSON.stringify(this.state.currentCell)); // deep copy
+      console.log(currentCell, "copied object on state all conditions true");
+      currentCell.value = this.state.currentNumber; //set the value key to curent number.
 
-    
-   
-  }
+      //Scan to make sure that is a valid move if it isn't set repeated to true on the currentCell object.
+      const isThereARepeat = this.checkForRepeats(
+        (currentCell.row),
+        (currentCell.col),
+        (currentCell.group),
+        (this.state.currentNumber)
+      );
+      console.log(isThereARepeat)
+      if(isThereARepeat){
+        currentCell.repeated = true; 
+      }
+      const boardArray = this.state.boardArray.slice(); 
+      boardArray[currentCell.index -1] = currentCell; 
+      const columns = document.querySelectorAll(".column");
+
+      for(let column of columns){
+        column.style.backgroundColor = "inherit";
+        column.style.cursor = "inherit";
+      }
+      
+      this.setState({currentCell: {}, numberClicked : false, cellClicked : false, boardArray}, this.putGroupsTogether(this.state.board, boardArray))
+    }// end of if conditional. 
+
+  };
 
   gameComplete = () => {
     /*This function will check if the game is complete and update the game over key on the state.  */
-
-  }
-  
+  };
 
   render() {
-    console.log(this.state);
+    console.log(this.state.grid);
     return (
       <div className="container">
         <header className="App-header">
@@ -1124,22 +1506,26 @@ class App extends Component {
           <Home
             grid={this.state.board}
             color={this.state.colors[this.state.colorsIndex]}
-            group1 = {this.state.group1}
-            group2 = {this.state.group2}
-            group3 = {this.state.group3}
-            group4 = {this.state.group4}
-            group5 = {this.state.group5}
-            group6 = {this.state.group6}
-            group7 = {this.state.group7}
-            group8 = {this.state.group8}
-            group9 = {this.state.group9}
+            group1={this.state.group1}
+            group2={this.state.group2}
+            group3={this.state.group3}
+            group4={this.state.group4}
+            group5={this.state.group5}
+            group6={this.state.group6}
+            group7={this.state.group7}
+            group8={this.state.group8}
+            group9={this.state.group9}
             // functions below
-            onCellHover = {this.onCellHover}
-            onCellHoverOut = {this.onCellHoverOut}
-            onCellClick = {this.onCellClick}
+            onCellHover={this.onCellHover}
+            onCellHoverOut={this.onCellHoverOut}
+            onCellClick={this.onCellClick}
           />
         </div>
-        <Numbers onNumberClicked = {this.onNumberClicked} onNumberMouseIn = {this.onNumberMouseIn} onNumberMouseOut = {this.onNumberMouseOut}/>
+        <Numbers
+          onNumberClicked={this.onNumberClicked}
+          onNumberMouseIn={this.onNumberMouseIn}
+          onNumberMouseOut={this.onNumberMouseOut}
+        />
       </div>
     );
   }
