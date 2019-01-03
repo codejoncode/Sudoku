@@ -1425,18 +1425,6 @@ class App extends Component {
       );
       
       if(isThereARepeat){
-        console.log(currentCell)
-        console.log("Repeat happening")
-        console.log(this.state.group1)
-        console.log(this.state.group2)
-        console.log(this.state.group3)
-        console.log(this.state.group4)
-        console.log(this.state.group4)
-        console.log(this.state.group5)
-        console.log(this.state.group6)
-        console.log(this.state.group7)
-        console.log(this.state.group8)
-        console.log(this.state.group9)
         currentCell.repeated = true; 
       }
       const boardArray = this.state.boardArray.slice(); 
@@ -1470,7 +1458,6 @@ class App extends Component {
   }
 
   render() {
-    console.log(this.state.grid);
     return (
       <div className="container">
         <header className="App-header">
