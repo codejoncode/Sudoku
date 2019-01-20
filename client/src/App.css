@@ -14,7 +14,7 @@
 }
 .keep-as-row {
   display: flex;
-  justify-content: space-between;
+  /* justify-content: space-between; */
 }
 
 /* AppTitle.js */
@@ -86,7 +86,23 @@
 .repeated {
   color: red; 
 }
+button{
+  margin: 2px;
+}
+button:hover {
+  cursor: pointer; 
+}
 
+.digits {
+  display: flex;
+  flex-direction: row;
+  margin:20px;
+}
+
+.game-button {
+  color: #00BAF6;
+  background-color: black;
+}
 
 /* Media query  */
 @media (max-width: 500px){

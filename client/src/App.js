@@ -4,9 +4,18 @@ import "./App.css";
 import Home from "./Components/Home";
 import AppTitle from "./Components/AppTitle";
 import Numbers from "./Components/Numbers";
+import TimerOnScreen from "./Components/TimerOnScreen";
+import TimerStart from "./Components/TimerStart";
 //![sudoku_solved_by_bactracking](https://user-images.githubusercontent.com/38900224/50551230-17042300-0c43-11e9-8ddd-802f09ab2d50.gif)
 class App extends Component {
+  timer = "";
   state = {
+    so: 0,
+    st: 0,
+    sm: 0,
+    tm: 0,
+    solving : false,
+    timerCount: 0,
     difficulty: ["Easy", "Medium", "Hard"],
     difficultyIndex: 0,
     colors: [
@@ -108,7 +117,7 @@ class App extends Component {
     colorsIndex: 0,
     grid: [],
     board: [],
-    boardArray: [], 
+    boardArray: [],
     group1: [],
     group2: [],
     group3: [],
@@ -171,6 +180,7 @@ class App extends Component {
         );
     }
     const revealingIndexs = [];
+    // this.state.solving ? [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32,33,34,35,36,37,38,39,40,41,42,43,44,45,46,47,48,49,50,51,52,53,54,55,56,57,58,59,60,61,62,63,64,65,66,67,68,69,70,71,72,73,74,75,76,77,78,79,80,81]
     while (revealingIndexs.length < revealing) {
       const j = Math.ceil(Math.random() * 81);
       if (revealingIndexs.includes(j) === false) {
@@ -373,8 +383,8 @@ class App extends Component {
       boardArray.push(tempObj);
       startIndex += 1;
     } //end of while loop
-    
-    this.putGroupsTogether(board, boardArray);
+    this.setState({solving:false},this.putGroupsTogether(board, boardArray) )
+    // this.putGroupsTogether(board, boardArray);
   };
 
   putGroupsTogether = (board, boardArray) => {
@@ -502,8 +512,9 @@ class App extends Component {
       }
     }
     this.setState({
-      // cellClicked: false, 
+      // cellClicked: false,
       // numberClicked: false,
+      solving : false,
       board,
       boardArray,
       group1,
@@ -532,7 +543,7 @@ class App extends Component {
       row6,
       row7,
       row8,
-      row9,
+      row9
     });
   };
 
@@ -613,7 +624,7 @@ class App extends Component {
     /*Checks to see if value is needed in section
          section should be an array and toBeAdded should be an integer
          returns true or false performs a check for if section is an array. */
-    
+
     let valid = false;
     Array.isArray(section)
       ? (valid = true)
@@ -698,7 +709,7 @@ class App extends Component {
 
   createBoard = () => {
     /*This will create the game board */
-    console.log("new board")
+    console.log("new board");
     const grid = [
       [0, 0, 0, 0, 0, 0, 0, 0, 0],
       [0, 0, 0, 0, 0, 0, 0, 0, 0],
@@ -1211,7 +1222,7 @@ class App extends Component {
       /*maxInput is where each column is 45 * 9 */
       let attempts = 0; // start attempts at 0 each time.
       const value = numbers.slice(numbersIndex, numbersIndex + 1); //Value is an array of 1 elements.
-      
+
       const doesSectionNeedValue =
         this.valueNeeded(indexToGroup[backTrackerIndex], value[0], 932) &&
         this.valueNeeded(indexToColumn[backTrackerIndex], value[0], 933) &&
@@ -1249,8 +1260,8 @@ class App extends Component {
         backTrackerIndex -= 1; // decrement/backtrack reset the previous.
       }
     } // end of primary while loop
-    
-    this.setState({ grid }, () => {
+
+    this.setState({ solving: false, grid }, () => {
       this.setUpPlayingBoard();
     });
   }; //end of function
@@ -1270,7 +1281,7 @@ class App extends Component {
     */
     if (cellData.changable && this.state.cellClicked === false) {
       event.target.style.backgroundColor = "blue";
-      event.target.style.cursor = "pointer"; 
+      event.target.style.cursor = "pointer";
     }
   };
   onCellHoverOut = (event, cellData) => {
@@ -1281,7 +1292,7 @@ class App extends Component {
 
     if (this.state.cellClicked === false) {
       event.target.style.backgroundColor = "inherit";
-      event.target.style.cursor = "inherit"; 
+      event.target.style.cursor = "inherit";
     }
   };
 
@@ -1290,25 +1301,25 @@ class App extends Component {
       It will also change a propety on state cellClicked so that a user cannot click mutliple cells at 
       a time. 
     */
-   const currentCell = JSON.parse(JSON.stringify(cellData)); // deep copy
-   const boardArray = this.state.boardArray.slice();
+    const currentCell = JSON.parse(JSON.stringify(cellData)); // deep copy
+    const boardArray = this.state.boardArray.slice();
     if (this.state.cellClicked === false) {
-      
       currentCell.clicked = true;
-      
+
       boardArray[currentCell.index - 1] = currentCell;
       // because cells are indexed 1-81 the position in the board array can be reached by taking the index
       // minus 1 so that the state can be updated with the correct information.
-      this.setState({ cellClicked: true, currentCell, boardArray, }, () => {
-        this.callTwoFunctions(boardArray)
-      }
-      );
+      this.setState({ cellClicked: true, currentCell, boardArray }, () => {
+        this.callTwoFunctions(boardArray);
+      });
     } else if (currentCell.clicked) {
       currentCell.clicked = false;
       boardArray[currentCell.index - 1] = currentCell;
       // because cells are indexed 1-81 the position in the board array can be reached by taking the index
       // minus 1 so that the state can be updated with the correct information.
-      this.setState({ cellClicked: false, currentCell: {}, boardArray }, () => this.putGroupsTogether(this.state.board, boardArray));
+      this.setState({ cellClicked: false, currentCell: {}, boardArray }, () =>
+        this.putGroupsTogether(this.state.board, boardArray)
+      );
     }
   };
 
@@ -1319,7 +1330,6 @@ class App extends Component {
     if (this.state.numberClicked === false) {
       event.target.style.cursor = "pointer";
       event.target.style.backgroundColor = "blue";
-      
     }
   };
 
@@ -1338,6 +1348,9 @@ class App extends Component {
       number clicked key on state is false it will allow for a click of a number and 
       set the key on state to true, then it sets currentNumber to the number.  else it will set the key on state to false and 
       it sets the current number key on state to false. */
+    if (number === "erase") {
+      number = " ";
+    }
     if (this.state.numberClicked === false) {
       this.setState({ numberClicked: true, currentNumber: number }, () =>
         // this.callTwoFunctions(this.state.boardArray.slice())
@@ -1348,18 +1361,18 @@ class App extends Component {
     }
   };
 
-  callTwoFunctions = (boardArray) => {
+  callTwoFunctions = boardArray => {
     this.updateCell();
-    this.putGroupsTogether(this.state.board, boardArray); 
-  }
-  
+    this.putGroupsTogether(this.state.board, boardArray);
+  };
+
   checkForRepeats = (row, col, group, value) => {
     /*
       Four paramaters accepted row col group value functions purpose is to return true or false for if their are repeats. 
       if false is returned this means no repeats which is good for the board.  True means there is repeats for that section.
       This is bad for the board. this function is used with updateCell and called inside of it. 
     */
-    
+
     const groups = {
       group1: this.state.group1.slice().map(take => take.value),
       group2: this.state.group2.slice().map(take => take.value),
@@ -1371,8 +1384,8 @@ class App extends Component {
       group8: this.state.group8.slice().map(take => take.value),
       group9: this.state.group9.slice().map(take => take.value)
     };
-    const groupRepeat = groups[group].includes(value);//false if no repeat
-     
+    const groupRepeat = groups[group].includes(value); //false if no repeat
+
     const rows = {
       row1: this.state.row1.slice().map(take => take.value),
       row2: this.state.row2.slice().map(take => take.value),
@@ -1384,8 +1397,8 @@ class App extends Component {
       row8: this.state.row8.slice().map(take => take.value),
       row9: this.state.row9.slice().map(take => take.value)
     };
-    const rowRepeat = rows[row].includes(value);// false  if no repeat
-    
+    const rowRepeat = rows[row].includes(value); // false  if no repeat
+
     const cols = {
       col1: this.state.col1.slice().map(take => take.value),
       col2: this.state.col2.slice().map(take => take.value),
@@ -1397,8 +1410,8 @@ class App extends Component {
       col8: this.state.col8.slice().map(take => take.value),
       col9: this.state.col9.slice().map(take => take.value)
     };
-    const colRepeat = cols[col].includes(value);//false if no repeat. 
-    return groupRepeat || rowRepeat || colRepeat // will return true if one of them is true  false only if all are false. 
+    const colRepeat = cols[col].includes(value); //false if no repeat.
+    return groupRepeat || rowRepeat || colRepeat; // will return true if one of them is true  false only if all are false.
   };
 
   updateCell = () => {
@@ -1413,39 +1426,45 @@ class App extends Component {
     */
     if (this.state.numberClicked && this.state.cellClicked) {
       const currentCell = JSON.parse(JSON.stringify(this.state.currentCell)); // deep copy
-      
+
       currentCell.value = this.state.currentNumber; //set the value key to curent number.
 
       //Scan to make sure that is a valid move if it isn't set repeated to true on the currentCell object.
       const isThereARepeat = this.checkForRepeats(
-        (currentCell.row),
-        (currentCell.col),
-        (currentCell.group),
-        (this.state.currentNumber)
+        currentCell.row,
+        currentCell.col,
+        currentCell.group,
+        this.state.currentNumber
       );
-      
-      if(isThereARepeat){
-        currentCell.repeated = true; 
+
+      if (isThereARepeat) {
+        currentCell.repeated = true;
       }
-      const boardArray = this.state.boardArray.slice(); 
-      boardArray[currentCell.index -1] = currentCell; 
+      const boardArray = this.state.boardArray.slice();
+      boardArray[currentCell.index - 1] = currentCell;
       const columns = document.querySelectorAll(".column");
 
-      for(let column of columns){
+      for (let column of columns) {
         column.style.backgroundColor = "inherit";
         column.style.cursor = "inherit";
       }
 
       const numbers = document.querySelectorAll(".number");
-      for (let number of numbers){
+      for (let number of numbers) {
         number.style.cursor = "inherit";
         number.style.backgroundColor = "#00BAF6";
       }
 
-      
-      this.setState({currentCell: {}, numberClicked : false, cellClicked : false, boardArray}, () => this.putGroupsTogether(this.state.board, boardArray))
-    }// end of if conditional. 
-
+      this.setState(
+        {
+          currentCell: {},
+          numberClicked: false,
+          cellClicked: false,
+          boardArray
+        },
+        () => this.putGroupsTogether(this.state.board, boardArray)
+      );
+    } // end of if conditional.
   };
 
   gameComplete = () => {
@@ -1454,19 +1473,101 @@ class App extends Component {
 
   adjustDifficulty = event => {
     /*This will set the difficulty index and then recreate the board*/
-    this.setState({ [event.target.name]: event.target.value }, this.createBoard());
+    this.setState(
+      { [event.target.name]: event.target.value },
+      this.createBoard()
+    );
+  };
+
+  startTimer = () => {
+    // let value = document.getElementById("minutes");
+
+    // let valueInt = parseInt(value.options[value.selectedIndex].value, 10);
+
+    let so = this.state.so; //single ones
+    let st = this.state.st; //second tens//
+    let sm = this.state.sm; // single minutes
+    let tm = this.state.tm; //tens minutes
+    so++;
+    if (so === 10) {
+      st++;
+      so = 0;
+    }
+    if (st === 6) {
+      so = 0;
+      st = 0;
+      sm++;
+    }
+    if (sm === 10) {
+      so = 0;
+      st = 0;
+      sm = 0;
+      tm++;
+    }
+    // if (parseInt(tm+sm , 10) >= valueInt){
+    //   window.clearInterval(this.timer);
+    // }
+
+    this.setState({
+      timerCount: this.state.timerCount + 1,
+      so,
+      st,
+      sm,
+      tm
+    });
+  };
+
+  stopTimer = () => {
+    window.clearInterval(this.timer);
+    let timerStop = true;
+    this.setState({ timerStop: timerStop });
+  };
+  resetTimer = () => {
+    window.clearInterval(this.timer);
+    let timerStop = true;
+    this.setState({
+      so: 0,
+      mh: 0,
+      st: 0,
+      mt: 0,
+      sm: 0,
+      tm: 0,
+      tick: 0,
+      timerCount: 0,
+      timerStop: timerStop
+    });
+  };
+
+  handleStartTimer = () => {
+    this.timer = window.setInterval(this.startTimer, 1000);
+    this.setState({ timerStop: false });
+  };
+
+  handleSolve = () => {
+    // this.setState({solving : true}, this.setUpPlayingBoard())
+    // difficultyIndex setUpPlayingBoard
+    const boardArray = this.state.boardArray.slice()
+    let start = 0
+    while (start < 81){
+      const row = this.state.backTracker[start + 1][0]
+      const col = this.state.backTracker[start + 1][1]
+      boardArray[start].value = this.state.grid[row][col];
+      start += 1; 
+    }
+    this.setState({boardArray});
   }
 
   render() {
+    console.log(this.state.grid)
+    console.log(this.state.board)
+    console.log(this.state.boardArray)
     return (
       <div className="container">
-        <header className="App-header">
-          <AppTitle />
-        </header>
-        <div className="small-container keep-as-row">
-          <button className="new-game game-button" onClick = {this.createBoard}>New Game</button>
-          {/* <button className = "new-game game-button">Solver Grid</button>  */}
-          <br />
+        <div className="gameOptions">
+          <button className="new-game game-button" onClick={this.createBoard}>
+            New Game
+          </button>
+          <button className="game-button" onClick = {this.handleSolve}>Solve</button>
           <div className="keep-as-row">
             <h5>
               Difficulty {this.state.difficulty[this.state.difficultyIndex]}
@@ -1482,7 +1583,28 @@ class App extends Component {
               onChange={this.adjustDifficulty}
             />
           </div>
-        
+        </div>
+        <header className="App-header">
+          <AppTitle />
+        </header>
+
+        <div className="small-container keep-as-row">
+          {/* <button className="new-game game-button" onClick = {this.createBoard}>New Game</button> */}
+          {/* <button className = "new-game game-button">Solver Grid</button>  */}
+          <br />
+          <div className="timing">
+            <TimerStart
+              handleStart={this.handleStartTimer}
+              handleStop={this.stopTimer}
+              handleReset={this.resetTimer}
+            />
+            <TimerOnScreen
+              tensMinute={this.state.tm}
+              singleMinute={this.state.sm}
+              secondTens={this.state.st}
+              secondOnes={this.state.so}
+            />
+          </div>
         </div>
         <div className="small-container">
           <Home

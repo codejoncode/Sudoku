@@ -4,7 +4,7 @@ class Numbers extends Component {
   state = {};
 
   render() {
-    const numbers = [1, 2, 3, 4, 5, 6, 7, 8, 9];
+    const numbers = [1, 2, 3, 4, 5, 6, 7, 8, 9, "erase"];
     return (
       <div className="small-container">
         <div className="number-row">
