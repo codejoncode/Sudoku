@@ -1372,7 +1372,7 @@ class App extends Component {
       if false is returned this means no repeats which is good for the board.  True means there is repeats for that section.
       This is bad for the board. this function is used with updateCell and called inside of it. 
     */
-
+    const numbers = [1,2,3,4,5,6,7,8,9] // check that numbers are repeated  for when erase happens
     const groups = {
       group1: this.state.group1.slice().map(take => take.value),
       group2: this.state.group2.slice().map(take => take.value),
@@ -1384,7 +1384,7 @@ class App extends Component {
       group8: this.state.group8.slice().map(take => take.value),
       group9: this.state.group9.slice().map(take => take.value)
     };
-    const groupRepeat = groups[group].includes(value); //false if no repeat
+    const groupRepeat = groups[group].includes(value) && numbers.includes(value); //false if no repeat
 
     const rows = {
       row1: this.state.row1.slice().map(take => take.value),
@@ -1397,7 +1397,7 @@ class App extends Component {
       row8: this.state.row8.slice().map(take => take.value),
       row9: this.state.row9.slice().map(take => take.value)
     };
-    const rowRepeat = rows[row].includes(value); // false  if no repeat
+    const rowRepeat = rows[row].includes(value) && numbers.includes(value); // false  if no repeat
 
     const cols = {
       col1: this.state.col1.slice().map(take => take.value),
@@ -1410,7 +1410,7 @@ class App extends Component {
       col8: this.state.col8.slice().map(take => take.value),
       col9: this.state.col9.slice().map(take => take.value)
     };
-    const colRepeat = cols[col].includes(value); //false if no repeat.
+    const colRepeat = cols[col].includes(value) && numbers.includes(value); //false if no repeat.
     return groupRepeat || rowRepeat || colRepeat; // will return true if one of them is true  false only if all are false.
   };
 
@@ -1439,6 +1439,8 @@ class App extends Component {
 
       if (isThereARepeat) {
         currentCell.repeated = true;
+      } else {
+        currentCell.repeated = false;
       }
       const boardArray = this.state.boardArray.slice();
       boardArray[currentCell.index - 1] = currentCell;
@@ -1544,8 +1546,7 @@ class App extends Component {
   };
 
   handleSolve = () => {
-    // this.setState({solving : true}, this.setUpPlayingBoard())
-    // difficultyIndex setUpPlayingBoard
+    /*Will go through and update the empy fields until the entire board is filled with the correct answer */
     const boardArray = this.state.boardArray.slice()
     let start = 0
     while (start < 81){
@@ -1558,9 +1559,7 @@ class App extends Component {
   }
 
   render() {
-    console.log(this.state.grid)
-    console.log(this.state.board)
-    console.log(this.state.boardArray)
+    console.log(this.state.grid);
     return (
       <div className="container">
         <div className="gameOptions">
