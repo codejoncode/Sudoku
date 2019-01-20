@@ -9,6 +9,7 @@ import TimerStart from "./Components/TimerStart";
 //![sudoku_solved_by_bactracking](https://user-images.githubusercontent.com/38900224/50551230-17042300-0c43-11e9-8ddd-802f09ab2d50.gif)
 class App extends Component {
   timer = "";
+  valid = false
   state = {
     so: 0,
     st: 0,
@@ -552,60 +553,60 @@ class App extends Component {
       Also checks that values 1 - 9 is in the array needed for this program. 
     */
     // let valid = false;
-    let valid = false;
+    // let valid = false;
 
     Array.isArray(array)
-      ? (valid = true)
+      ? (this.valid = true)
       : console.error(
           "Type Error :Unexpected Type argument should be an array line 19"
         );
     array.length === 9
-      ? (valid = true)
+      ? (this.valid = true)
       : console.error(
           "Type Error : Unexpected Length argument should be length 9 line 20"
         );
     array.includes(1)
-      ? (valid = true)
+      ? (this.valid = true)
       : console.error(
           "Type Error : Value missing array should include the integer 1 line 21"
         );
     array.includes(2)
-      ? (valid = true)
+      ? (this.valid = true)
       : console.error(
           "Type Error : Value missing array should include the integer 2 line 22"
         );
     array.includes(3)
-      ? (valid = true)
+      ? (this.valid = true)
       : console.error(
           "Type Error : Value missing array should include the integer 3 line 23"
         );
     array.includes(4)
-      ? (valid = true)
+      ? (this.valid = true)
       : console.error(
           "Type Error : Value missing array should include the integer 4 line 24"
         );
     array.includes(5)
-      ? (valid = true)
+      ? (this.valid = true)
       : console.error(
           "Type Error : Value missing array should include the integer 5 line 25"
         );
     array.includes(6)
-      ? (valid = true)
+      ? (this.valid = true)
       : console.error(
           "Type Error : Value missing array should include the integer 6 line 26"
         );
     array.includes(7)
-      ? (valid = true)
+      ? (this.valid = true)
       : console.error(
           "Type Error : Value missing array should include the integer 7 line 27"
         );
     array.includes(8)
-      ? (valid = true)
+      ? (this.valid = true)
       : console.error(
           "Type Error : Value missing array should include the integer 8 line 28"
         );
     array.includes(9)
-      ? (valid = true)
+      ? (this.valid = true)
       : console.error(
           "Type Error : Value missing array should include the integer 9 line 29"
         );
@@ -625,9 +626,9 @@ class App extends Component {
          section should be an array and toBeAdded should be an integer
          returns true or false performs a check for if section is an array. */
 
-    let valid = false;
+    // let valid = false;
     Array.isArray(section)
-      ? (valid = true)
+      ? (this.valid = true)
       : console.error(
           `TypeError : Unexpected Type  section must be an array line ${from}`
         );
@@ -648,49 +649,49 @@ class App extends Component {
     /* This function will use sumArray on each of the paramaters. Paramaters should be array objects
           Performs checks if each paramater is an array. 
         */
-    let valid = false;
+    // let valid = false;
     Array.isArray(one)
-      ? (valid = true)
+      ? (this.valid = true)
       : console.error(
           "TypeError : Unexpected Type  one section must be an array line 145"
         );
     Array.isArray(two)
-      ? (valid = true)
+      ? (this.valid = true)
       : console.error(
           "TypeError : Unexpected Type  two must be an array line 146"
         );
     Array.isArray(three)
-      ? (valid = true)
+      ? (this.valid = true)
       : console.error(
           "TypeError : Unexpected Type  three must be an array line 147"
         );
     Array.isArray(four)
-      ? (valid = true)
+      ? (this.valid = true)
       : console.error(
           "TypeError : Unexpected Type  four must be an array line 148"
         );
     Array.isArray(five)
-      ? (valid = true)
+      ? (this.valid = true)
       : console.error(
           "TypeError : Unexpected Type  five must be an array line 149"
         );
     Array.isArray(six)
-      ? (valid = true)
+      ? (this.valid = true)
       : console.error(
           "TypeError : Unexpected Type  six must be an array line 150"
         );
     Array.isArray(seven)
-      ? (valid = true)
+      ? (this.valid = true)
       : console.error(
           "TypeError : Unexpected Type  seven must be an array line 151"
         );
     Array.isArray(eight)
-      ? (valid = true)
+      ? (this.valid = true)
       : console.error(
           "TypeError : Unexpected Type  eight must be an array line 152"
         );
     Array.isArray(nine)
-      ? (valid = true)
+      ? (this.valid = true)
       : console.error(
           "TypeError : Unexpected Type  nine must be an array line 153"
         );
@@ -1559,7 +1560,6 @@ class App extends Component {
   }
 
   render() {
-    console.log(this.state.grid);
     return (
       <div className="container">
         <div className="gameOptions">
