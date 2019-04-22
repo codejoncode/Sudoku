@@ -5,71 +5,12 @@ class Grid extends Component {
   state = {};
 
   render() {
+    const {onCellHoverOut, onCellHover, onCellClick, group1, group2, group3, group4, group5, group6, group7, group8, group9} = this.props;
+    const groups = [group1, group2, group3, group4, group5, group6, group7, group8, group9]; 
     return (
       <div className="grid-container">
-        <ThreeByThree
-          onCellHoverOut={this.props.onCellHoverOut}
-          onCellHover={this.props.onCellHover}
-          onCellClick = {this.props.onCellClick}
-          group={this.props.group1}
-          color="#57A4BC"
-        />
-        <ThreeByThree
-          onCellHoverOut={this.props.onCellHoverOut}
-          onCellHover={this.props.onCellHover}
-          onCellClick = {this.props.onCellClick}
-          group={this.props.group2}
-          color="#B0CCE8"
-        />
-        <ThreeByThree
-          onCellHoverOut={this.props.onCellHoverOut}
-          onCellHover={this.props.onCellHover}
-          onCellClick = {this.props.onCellClick}
-          group={this.props.group3}
-          color="#0094B7"
-        />
-        <ThreeByThree
-          onCellHoverOut={this.props.onCellHoverOut}
-          onCellHover={this.props.onCellHover}
-          onCellClick = {this.props.onCellClick}
-          group={this.props.group4}
-          color="#0093D4"
-        />
-        <ThreeByThree
-          onCellHoverOut={this.props.onCellHoverOut}
-          onCellHover={this.props.onCellHover}
-          onCellClick = {this.props.onCellClick}
-          group={this.props.group5}
-          color="#4EADDD"
-        />
-        <ThreeByThree
-          onCellHoverOut={this.props.onCellHoverOut}
-          onCellHover={this.props.onCellHover}
-          onCellClick = {this.props.onCellClick}
-          group={this.props.group6}
-          color="#D0E3F1"
-        />
-        <ThreeByThree
-          onCellHoverOut={this.props.onCellHoverOut}
-          onCellHover={this.props.onCellHover}
-          onCellClick = {this.props.onCellClick}
-          group={this.props.group7}
-          color="#84BEE5"
-        />
-        <ThreeByThree
-          onCellHoverOut={this.props.onCellHoverOut}
-          onCellHover={this.props.onCellHover}
-          onCellClick = {this.props.onCellClick}
-          group={this.props.group8}
-          color="#8CAAD2"
-        />
-        <ThreeByThree
-          onCellHoverOut={this.props.onCellHoverOut}
-          onCellHover={this.props.onCellHover}
-          onCellClick = {this.props.onCellClick}
-          group={this.props.group9}
-          color="#84C4CB"
-        />
+        {groups.map((group, id) => <ThreeByThree  key = {id} onCellHoverOut = {onCellHoverOut} onCellHover = {onCellHover} onCellClick = {onCellClick} group = {group}/>)}
+        {/* remvoed color   color="#B0CCE8" color="#0094B7" color="#57A4BC" color="#0093D4" color="#D0E3F1" color="#8CAAD2" color="#4EADDD" color="#84BEE5" color="#8CAAD2" color="#84C4CB" */}
       </div>
     );
   }
