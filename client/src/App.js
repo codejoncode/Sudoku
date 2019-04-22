@@ -6,6 +6,11 @@ import AppTitle from "./Components/AppTitle";
 import Numbers from "./Components/Numbers";
 import TimerOnScreen from "./Components/TimerOnScreen";
 import TimerStart from "./Components/TimerStart";
+
+import shuffleArray from "./Functions/ShuffleArray";
+import sumTheArrayGrid from "./Functions/ArrayGridSum";
+import checkForValue from "./Functions/CheckforValue";
+
 //![sudoku_solved_by_bactracking](https://user-images.githubusercontent.com/38900224/50551230-17042300-0c43-11e9-8ddd-802f09ab2d50.gif)
 class App extends Component {
   timer = "";
@@ -549,76 +554,14 @@ class App extends Component {
   };
 
   shuffle = array => {
-    /*Purpose of this function is to return a shuffled version of the numbers checks to see if array is an array
-      Also checks that values 1 - 9 is in the array needed for this program. 
-    */
-    // let valid = false;
-    // let valid = false;
+    /*Calls ShuffleArray and will will return an array and a boolean inside of an array */
+    let arrayAndValidStatus; 
+    if(array){
+      arrayAndValidStatus = shuffleArray(array);
+      this.valid = arrayAndValidStatus[1]; 
+      return arrayAndValidStatus[0]
 
-    Array.isArray(array)
-      ? (this.valid = true)
-      : console.error(
-          "Type Error :Unexpected Type argument should be an array line 19"
-        );
-    array.length === 9
-      ? (this.valid = true)
-      : console.error(
-          "Type Error : Unexpected Length argument should be length 9 line 20"
-        );
-    array.includes(1)
-      ? (this.valid = true)
-      : console.error(
-          "Type Error : Value missing array should include the integer 1 line 21"
-        );
-    array.includes(2)
-      ? (this.valid = true)
-      : console.error(
-          "Type Error : Value missing array should include the integer 2 line 22"
-        );
-    array.includes(3)
-      ? (this.valid = true)
-      : console.error(
-          "Type Error : Value missing array should include the integer 3 line 23"
-        );
-    array.includes(4)
-      ? (this.valid = true)
-      : console.error(
-          "Type Error : Value missing array should include the integer 4 line 24"
-        );
-    array.includes(5)
-      ? (this.valid = true)
-      : console.error(
-          "Type Error : Value missing array should include the integer 5 line 25"
-        );
-    array.includes(6)
-      ? (this.valid = true)
-      : console.error(
-          "Type Error : Value missing array should include the integer 6 line 26"
-        );
-    array.includes(7)
-      ? (this.valid = true)
-      : console.error(
-          "Type Error : Value missing array should include the integer 7 line 27"
-        );
-    array.includes(8)
-      ? (this.valid = true)
-      : console.error(
-          "Type Error : Value missing array should include the integer 8 line 28"
-        );
-    array.includes(9)
-      ? (this.valid = true)
-      : console.error(
-          "Type Error : Value missing array should include the integer 9 line 29"
-        );
-
-    for (let i = array.length - 1; i > 0; i--) {
-      const j = Math.floor(Math.random() * (i + 1));
-      const temp = array[i];
-      array[i] = array[j];
-      array[j] = temp;
     }
-
-    return array;
   };
 
   valueNeeded = (section, toBeAdded, from) => {
@@ -626,86 +569,15 @@ class App extends Component {
          section should be an array and toBeAdded should be an integer
          returns true or false performs a check for if section is an array. */
 
-    // let valid = false;
-    Array.isArray(section)
-      ? (this.valid = true)
-      : console.error(
-          `TypeError : Unexpected Type  section must be an array line ${from}`
-        );
-
-    if (section.includes(toBeAdded)) {
-      return false;
-    } else {
-      return true;
-    }
+    return checkForValue(section, toBeAdded, from);
   };
 
-  sumArray = (total, num) => {
-    /*This will be used with the reduce method and sum up the numbers */
-    return total + num;
-  };
 
   sumTheGrid = (one, two, three, four, five, six, seven, eight, nine) => {
     /* This function will use sumArray on each of the paramaters. Paramaters should be array objects
           Performs checks if each paramater is an array. 
         */
-    // let valid = false;
-    Array.isArray(one)
-      ? (this.valid = true)
-      : console.error(
-          "TypeError : Unexpected Type  one section must be an array line 145"
-        );
-    Array.isArray(two)
-      ? (this.valid = true)
-      : console.error(
-          "TypeError : Unexpected Type  two must be an array line 146"
-        );
-    Array.isArray(three)
-      ? (this.valid = true)
-      : console.error(
-          "TypeError : Unexpected Type  three must be an array line 147"
-        );
-    Array.isArray(four)
-      ? (this.valid = true)
-      : console.error(
-          "TypeError : Unexpected Type  four must be an array line 148"
-        );
-    Array.isArray(five)
-      ? (this.valid = true)
-      : console.error(
-          "TypeError : Unexpected Type  five must be an array line 149"
-        );
-    Array.isArray(six)
-      ? (this.valid = true)
-      : console.error(
-          "TypeError : Unexpected Type  six must be an array line 150"
-        );
-    Array.isArray(seven)
-      ? (this.valid = true)
-      : console.error(
-          "TypeError : Unexpected Type  seven must be an array line 151"
-        );
-    Array.isArray(eight)
-      ? (this.valid = true)
-      : console.error(
-          "TypeError : Unexpected Type  eight must be an array line 152"
-        );
-    Array.isArray(nine)
-      ? (this.valid = true)
-      : console.error(
-          "TypeError : Unexpected Type  nine must be an array line 153"
-        );
-    return (
-      one.reduce(this.sumArray) +
-      two.reduce(this.sumArray) +
-      three.reduce(this.sumArray) +
-      four.reduce(this.sumArray) +
-      five.reduce(this.sumArray) +
-      six.reduce(this.sumArray) +
-      seven.reduce(this.sumArray) +
-      eight.reduce(this.sumArray) +
-      nine.reduce(this.sumArray)
-    );
+      return sumTheArrayGrid(one, two, three, four, five, six, seven, eight, nine); 
   };
 
   createBoard = () => {
