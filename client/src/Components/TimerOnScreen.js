@@ -7,9 +7,9 @@ class TimerOnScreen extends React.Component {
 
     render () {
         return (
-            <div className="digits">
+            <div className="digits timing">
             <br/>
-                <div>{this.props.timerCount}</div>
+                <div className = "">{this.props.timerCount}</div>
                 
                 <div className="digit" id="tensMinute">{this.props.tensMinute}</div>
                 <div className="digit" id="singleMinute">{this.props.singleMinute}</div>

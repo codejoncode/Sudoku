@@ -25,6 +25,7 @@
   color : #3894AC;
   background: #06445F;
   box-shadow: 2px 3px;
+  margin-top : 0px; 
 }
 
 /* Home.js */
@@ -102,6 +103,10 @@ button:hover {
 .game-button {
   color: #00BAF6;
   background-color: black;
+}
+
+.timing {
+  margin: 0 auto;
 }
 
 /* Media query  */

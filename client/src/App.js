@@ -1434,6 +1434,10 @@ class App extends Component {
   render() {
     return (
       <div className="container">
+        
+        <header className="App-header">
+          <AppTitle />
+        </header>
         <div className="gameOptions">
           <button className="new-game game-button" onClick={this.createBoard}>
             New Game
@@ -1455,9 +1459,6 @@ class App extends Component {
             />
           </div>
         </div>
-        <header className="App-header">
-          <AppTitle />
-        </header>
 
         <div className="small-container keep-as-row">
           {/* <button className="new-game game-button" onClick = {this.createBoard}>New Game</button> */}

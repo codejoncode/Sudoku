@@ -13,8 +13,8 @@ class Cell extends Component {
         onClick = {(event,) => this.props.onCellClick(event, this.props.data)}
         style={
           this.props.data.changable === false
-            ? { fontWeight: 900 }
-            : { fontWeight: "normal" }
+            ? { fontWeight: 900, textAlign : "center" }
+            : { fontWeight: "normal", textAlign : "center" }
         }
       >
         {this.props.data.value}
