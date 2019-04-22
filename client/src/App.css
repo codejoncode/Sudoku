@@ -16,6 +16,10 @@
   display: flex;
   /* justify-content: space-between; */
 }
+.gameOptions {
+  display: flex;
+  justify-content: space-between;
+}
 
 /* AppTitle.js */
 .title {
@@ -25,7 +29,8 @@
   color : #3894AC;
   background: #06445F;
   box-shadow: 2px 3px;
-  margin-top : 0px; 
+  margin-top : 0px;
+  margin-bottom: 0px;
 }
 
 /* Home.js */
@@ -105,9 +110,9 @@ button:hover {
   background-color: black;
 }
 
-.timing {
+/* .timing {
   margin: 0 auto;
-}
+} */
 
 /* Media query  */
 @media (max-width: 500px){

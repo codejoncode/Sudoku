@@ -14,13 +14,13 @@ import checkForValue from "./Functions/CheckforValue";
 //![sudoku_solved_by_bactracking](https://user-images.githubusercontent.com/38900224/50551230-17042300-0c43-11e9-8ddd-802f09ab2d50.gif)
 class App extends Component {
   timer = "";
-  valid = false
+  valid = false;
   state = {
     so: 0,
     st: 0,
     sm: 0,
     tm: 0,
-    solving : false,
+    solving: false,
     timerCount: 0,
     difficulty: ["Easy", "Medium", "Hard"],
     difficultyIndex: 0,
@@ -389,7 +389,10 @@ class App extends Component {
       boardArray.push(tempObj);
       startIndex += 1;
     } //end of while loop
-    this.setState({solving:false},this.putGroupsTogether(board, boardArray) )
+    this.setState(
+      { solving: false },
+      this.putGroupsTogether(board, boardArray)
+    );
     // this.putGroupsTogether(board, boardArray);
   };
 
@@ -520,7 +523,7 @@ class App extends Component {
     this.setState({
       // cellClicked: false,
       // numberClicked: false,
-      solving : false,
+      solving: false,
       board,
       boardArray,
       group1,
@@ -555,12 +558,11 @@ class App extends Component {
 
   shuffle = array => {
     /*Calls ShuffleArray and will will return an array and a boolean inside of an array */
-    let arrayAndValidStatus; 
-    if(array){
+    let arrayAndValidStatus;
+    if (array) {
       arrayAndValidStatus = shuffleArray(array);
-      this.valid = arrayAndValidStatus[1]; 
-      return arrayAndValidStatus[0]
-
+      this.valid = arrayAndValidStatus[1];
+      return arrayAndValidStatus[0];
     }
   };
 
@@ -572,12 +574,21 @@ class App extends Component {
     return checkForValue(section, toBeAdded, from);
   };
 
-
   sumTheGrid = (one, two, three, four, five, six, seven, eight, nine) => {
     /* This function will use sumArray on each of the paramaters. Paramaters should be array objects
           Performs checks if each paramater is an array. 
         */
-      return sumTheArrayGrid(one, two, three, four, five, six, seven, eight, nine); 
+    return sumTheArrayGrid(
+      one,
+      two,
+      three,
+      four,
+      five,
+      six,
+      seven,
+      eight,
+      nine
+    );
   };
 
   createBoard = () => {
@@ -1245,7 +1256,7 @@ class App extends Component {
       if false is returned this means no repeats which is good for the board.  True means there is repeats for that section.
       This is bad for the board. this function is used with updateCell and called inside of it. 
     */
-    const numbers = [1,2,3,4,5,6,7,8,9] // check that numbers are repeated  for when erase happens
+    const numbers = [1, 2, 3, 4, 5, 6, 7, 8, 9]; // check that numbers are repeated  for when erase happens
     const groups = {
       group1: this.state.group1.slice().map(take => take.value),
       group2: this.state.group2.slice().map(take => take.value),
@@ -1257,7 +1268,8 @@ class App extends Component {
       group8: this.state.group8.slice().map(take => take.value),
       group9: this.state.group9.slice().map(take => take.value)
     };
-    const groupRepeat = groups[group].includes(value) && numbers.includes(value); //false if no repeat
+    const groupRepeat =
+      groups[group].includes(value) && numbers.includes(value); //false if no repeat
 
     const rows = {
       row1: this.state.row1.slice().map(take => take.value),
@@ -1420,29 +1432,32 @@ class App extends Component {
 
   handleSolve = () => {
     /*Will go through and update the empy fields until the entire board is filled with the correct answer */
-    const boardArray = this.state.boardArray.slice()
-    let start = 0
-    while (start < 81){
-      const row = this.state.backTracker[start + 1][0]
-      const col = this.state.backTracker[start + 1][1]
+    const boardArray = this.state.boardArray.slice();
+    let start = 0;
+    while (start < 81) {
+      const row = this.state.backTracker[start + 1][0];
+      const col = this.state.backTracker[start + 1][1];
       boardArray[start].value = this.state.grid[row][col];
-      start += 1; 
+      start += 1;
     }
-    this.setState({boardArray});
-  }
+    this.setState({ boardArray });
+  };
 
   render() {
     return (
       <div className="container">
-        
         <header className="App-header">
           <AppTitle />
         </header>
         <div className="gameOptions">
-          <button className="new-game game-button" onClick={this.createBoard}>
-            New Game
-          </button>
-          <button className="game-button" onClick = {this.handleSolve}>Solve</button>
+          <div>
+            <button className="new-game game-button" onClick={this.createBoard}>
+              New Game
+            </button>
+            <button className="game-button" onClick={this.handleSolve}>
+              Solve
+            </button>
+          </div>
           <div className="keep-as-row">
             <h5>
               Difficulty {this.state.difficulty[this.state.difficultyIndex]}
@@ -1458,26 +1473,26 @@ class App extends Component {
               onChange={this.adjustDifficulty}
             />
           </div>
-        </div>
-
-        <div className="small-container keep-as-row">
-          {/* <button className="new-game game-button" onClick = {this.createBoard}>New Game</button> */}
-          {/* <button className = "new-game game-button">Solver Grid</button>  */}
-          <br />
-          <div className="timing">
-            <TimerStart
-              handleStart={this.handleStartTimer}
-              handleStop={this.stopTimer}
-              handleReset={this.resetTimer}
-            />
-            <TimerOnScreen
-              tensMinute={this.state.tm}
-              singleMinute={this.state.sm}
-              secondTens={this.state.st}
-              secondOnes={this.state.so}
-            />
+          <div className="keep-as-row">
+            {/* <button className="new-game game-button" onClick = {this.createBoard}>New Game</button> */}
+            {/* <button className = "new-game game-button">Solver Grid</button>  */}
+            <br />
+            <div className="timing">
+              <TimerStart
+                handleStart={this.handleStartTimer}
+                handleStop={this.stopTimer}
+                handleReset={this.resetTimer}
+              />
+              <TimerOnScreen
+                tensMinute={this.state.tm}
+                singleMinute={this.state.sm}
+                secondTens={this.state.st}
+                secondOnes={this.state.so}
+              />
+            </div>
           </div>
         </div>
+
         <div className="small-container">
           <Home
             grid={this.state.board}
